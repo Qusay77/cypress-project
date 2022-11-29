@@ -13,6 +13,7 @@ export default function Dashboard() {
 		data, error, isLoading, isSuccess,
 	} = useUsersQuery()
 	useEffect(() => {
+		// eslint-disable-next-line no-console
 		console.log(data, error, isLoading, isSuccess)
 	}, [isSuccess])
 	useEffect(() => {
