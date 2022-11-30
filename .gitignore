@@ -3,4 +3,3 @@ build/
 dist/
 .parcel-cache/
 staging/
-public/
