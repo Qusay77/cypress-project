@@ -2,7 +2,10 @@
 // import issue, crashes builds
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { fetchBaseQuery } from "@reduxjs/toolkit/query";
-
+interface User {
+	id: number;
+	name: string;
+}
 export const usersApi = createApi({
 	reducerPath: "api",
 	baseQuery: fetchBaseQuery({
@@ -10,9 +13,9 @@ export const usersApi = createApi({
 		baseUrl: process.env.REACT_APP_API_KEY,
 	}),
 	endpoints: (builder) => ({
-		users: builder.query({
+		users: builder.query<User, void>({
 			query: () => ({
-				url: "/",
+				url: "/users",
 			}),
 		}),
 	}),
