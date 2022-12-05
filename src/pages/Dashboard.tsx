@@ -6,7 +6,7 @@ const Button = styled.button`
 	color: hotpink;
 	background-color: white;
 `;
-let interval;
+let interval: NodeJS.Timeout | undefined;
 export default function Dashboard() {
 	const [counter, setCounter] = useState(0);
 	const { data, error, isLoading, isSuccess } = useUsersQuery();
