@@ -1,0 +1,5 @@
+{
+	"name": "@router/page-route",
+	"main": "index.tsx",
+	"version": "0.1.0"
+}

@@ -2,7 +2,7 @@ import React from "react";
 import { Router } from "@reach/router";
 import Home from "../../Home";
 import Dashboard from "../../pages/Dashboard";
-import { PageRoute } from "../PageRoute";
+import { PageRoute } from "@router/page-route";
 
 export default function MainRouter() {
 	return (

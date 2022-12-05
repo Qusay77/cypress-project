@@ -3,3 +3,4 @@ build/
 dist/
 .parcel-cache/
 staging/
+.vscode/
