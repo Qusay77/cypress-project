@@ -48,7 +48,7 @@ import Button from '@ui/button'
 
 - Developers can go in and out of the project without causing any technical dept for others. work would be easier to refactor and made obsolete if needed. also those components can be used out side of this project.
 
-- QA and developers alike can autmate tests as it fits them. using native tools like Cypress and outside testing frameworks for 3rd party tests.
+- QA and developers alike can automate tests as it fits them. using native tools like Cypress and outside testing frameworks for 3rd party tests.
 
 - PM's can straight up pick what is being problematic from the live Component showroom, can make tasks to
 create something, fix or change something, issues of components in their pages on origin 
