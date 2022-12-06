@@ -62,7 +62,7 @@ Here are the steps and issues faced while pulling this project togother
 ## Future Considerations
 - We might want to consider our styling again once more to make sure if its worth it
 - We might look into using a Monorepo tool, if it has a clear advantage. currect structure makes it a breeze to migrate
- 
+- Multiple environments are a must, so is CI/CD  
 
 ## Get Up and Running
 
