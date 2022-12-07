@@ -164,6 +164,9 @@ Storybook had a crash that was caused by used emotion pragma, the solution was t
  
  and there we have it so far.
 
+## Repeating Issues
+- storybook crash with html-webpack-plugin missing error, could be cause for having both html-webpack-plugin abd @types/html-webpack-plugin
+and yarn/npm cache issue, direct reason still unknown
 
 ## Future Considerations
 - We might want to consider our styling again once more to make sure if its worth it
