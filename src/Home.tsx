@@ -1,4 +1,3 @@
-import React from "react";
 import { CoolButton } from "@packages/button";
 
 export default function Home() {

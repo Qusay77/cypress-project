@@ -1,4 +1,3 @@
-import React from "react";
 import { RouteComponentProps } from "@reach/router";
 
 interface Routes extends RouteComponentProps {
