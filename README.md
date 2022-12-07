@@ -2,7 +2,7 @@
 In other words its our take on [Monorepos](https://monorepo.tools/)
 ## _This Document is Under Heavy Construction!_
 
-This setup aims to acheive the ability to automate, deploy and test standalone building blocks for constant review and feedback through their developement.
+This setup aims to achieve the ability to automate, deploy and test standalone building blocks for constant review and feedback through their development.
 
 # Stack
  Core 🔴
@@ -31,20 +31,20 @@ Package manager
 ## Concept
 
 - Separate each Component or a bunch into their own folders and containers. 
- this allows them to be imported in a module syntax, and they are easily accessable from Storybook and Cypress files. eg:  
+ this allows them to be imported in a module syntax, and they are easily accessible from Storybook and Cypress files. eg:  
 ```js
 import Button from '@ui/button'
 ```
 - Cleaner Code and bundles, Unused modules are out of the picture. Enforced standard and practices
 - Components are developed in a standalone environnement and are tested as they go 
-- Components and their multiple variations are deployed separatly from origin, making them available online for alot of reasons.
+- Components and their multiple variations are deployed separately from origin, making them available online for a lot of reasons.
 - live deployment for changes or fixes without interfering with the entire structure, only pushing affected component
 
-- allows for alot of creativity to take place, instead of limiting client's wishes and developer time of 
+- allows for a lot of creativity to take place, instead of limiting client's wishes and developer time of 
  fear of breaking things and wasting time.
 
 
-- Freindly for everyone envolved, clients are free to make decisicions.
+- Friendly for everyone involved, clients are free to make decisions.
 
 - Developers can go in and out of the project without causing any technical dept for others. work would be easier to refactor and made obsolete if needed. also those components can be used out side of this project.
 
@@ -55,13 +55,119 @@ create something, fix or change something, issues of components in their pages o
 
 ## Developer Roadmap
 
-Here are the steps and issues faced while pulling this project togother
+Here are the steps and issues faced while pulling this project together
 
-- TBD
+- Initializing a project without any build tool requires a lot of configuration to be done manually on the cost of less bloat.
+- Installed React along side typescript and Eslint. any files containing `jsx` need to have `.tsx` extension, files lacking `jsx` have to be `.ts`, `js` and `jsx` files are allowed but are preferred against.
+- eslint is an ongoing task as lint needs do grow and change, its been set alongside husky to enforce code style for consistency and clean code reviews.
+- env vars handled in a basic sense until CI/CD takes place.
+- Any building block is inside `src` directory, including the monorepo packages
+- Added storybook and cypress, ready and configured for both vite and webpack in their own branches
+- Added parcel and commands to handle repetitive tasks
+- Setup addons like `ReachRouter` and `RTK/RTKQuery`
+- Folder structure is a starter, and could have more additions later on
+
+
+## Setup Tasks
+
+Explaining major struggles when setting up some of used tech
+
+- Reach Router needed to have a wrapper component to handle routes types
+ ```js
+ import { RouteComponentProps } from "@reach/router";
+
+interface Routes extends RouteComponentProps {
+	Component: React.ReactElement;
+}
+
+const PageRoute = ({ Component }: Routes) => {
+	return Component;
+};
+```
+
+- emotion js required specific ts config to make use of `css` prop
+ ```json
+ "compilerOptions": {
+		"jsx": "react-jsx",
+		"jsxImportSource": "@emotion/react"
+	}
+ ```
+ 
+ - emotion js still requires use of pragma for `css` prop in any file its used
+  ```js
+  /** @jsxImportSource @emotion/react */
+  ```
+
+- Monorepo Packages require every package to have its own `package.json` file with at least the required minimum config added to them
+ ```json
+ {
+	"name": "@packages/____",
+	"main": "index.ts",
+	"version": "0.1.0"
+}
+ ```
+ - then root `package.json` file has to be put to private, and workspaces where the packages are.
+ 
+ ```json
+ {
+    ...
+     "private": true,
+	 "workspaces": [
+		"src/packages/**",
+		"src/router/**"
+	]
+	...
+}
+ ```
+
+ - Yarn easily does the linking and packages imported as their name in `package.json`
+
+
+ - while Storybook was easy to kickstart, cypress needed a few tricks to get going, same with storybook when trying to load a package that has use of emotions `css` prop.
+ -  Cypress need to have a plugin called `@cypress/webpack-preprocessor` its own webpack and ts config in its own folder. while for vite it needed `vite.config.js` to handle `emotion` plugin. 
+
+-  Build config has to be passed to devServer in `cypress.config.ts`.
+
+ -  One important thing to note is loading `React` components inside `.cy` files. they need to have `.tsx` extension
+and the correct tsconfig fo it so
+
+```json
+{
+	"extends": "../tsconfig.json",
+	"compilerOptions": {
+		"target": "es5",
+		"lib": ["es5", "dom"],
+		"types": ["cypress", "node"]
+	},
+	"include": ["**/*.ts", "**/*.tsx"]
+}
+
+```
+
+Storybook had a crash that was caused by used emotion pragma, the solution was to add a `.babelrc` file to root as inside Storybook folder it had issues. 
+
+```json
+{
+	"presets": [
+		"@babel/preset-env",
+		"@babel/preset-react",
+		"@babel/preset-typescript",
+		"@emotion/babel-preset-css-prop"
+	]
+}
+
+```
+ 
+ for both vite or webpack configs `@emotion/babel-preset-css-prop` is a package that needs to be installed.
+ 
+ since all is running on those tools with both build tools, it was time to return the project's main build tool parcel, as it was smooth from the start, it had an issue with `.babelrc` file and its asking for it to be removed. since we cant move that file to storybook, `.parcelrc` was made with config to ignore `.babelrc`.
+ 
+ and there we have it so far.
+
 
 ## Future Considerations
 - We might want to consider our styling again once more to make sure if its worth it
-- We might look into using a Monorepo tool, if it has a clear advantage. currect structure makes it a breeze to migrate
+- We might look into using a Monorepo tool, if it has a clear advantage. current structure makes it a breeze to migrate
 - Multiple environments are a must, so is CI/CD  
 
 ## Get Up and Running
