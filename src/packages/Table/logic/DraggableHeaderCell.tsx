@@ -2,7 +2,7 @@ import React from "react";
 import { useDrag, useDrop } from "react-dnd";
 import { Table } from "rsuite";
 import { ItemTypes } from "../constants";
-import { DraggableHeaderCellComponent } from "../types";
+import { DraggableHeaderCellComponent, dropItem, dropOps } from "../types";
 const { HeaderCell } = Table;
 
 const DraggableHeaderCell = ({
@@ -13,25 +13,24 @@ const DraggableHeaderCell = ({
 }: DraggableHeaderCellComponent) => {
 	const ref = React.useRef(null);
 
-	const [{ canDrop, isOver }, drop] = useDrop({
+	const [{ isOver }, drop] = useDrop<dropItem, void, dropOps>({
 		accept: ItemTypes.COLUMN,
 		collect: (monitor) => ({
 			isOver: monitor.isOver(),
 			canDrop: monitor.canDrop(),
 		}),
-		drop(item: { id: string }) {
+		drop(item) {
 			onDrag(item.id, id);
 		},
 	});
-
 	const [{ isDragging }, drag] = useDrag({
-		type: "drag",
+		type: ItemTypes.COLUMN,
 		item: { id, type: ItemTypes.COLUMN },
 		collect: (monitor) => ({
 			isDragging: monitor.isDragging(),
 		}),
 	});
-	const isActive = canDrop && isOver;
+	const isActive = isOver;
 
 	drag(drop(ref));
 
@@ -39,9 +38,8 @@ const DraggableHeaderCell = ({
 		padding: "0.6rem 1rem",
 		cursor: "grab",
 		opacity: isDragging ? 0 : 1,
-		borderLeft: `${isActive ? "2px solid #2589f5" : null}`,
+		borderLeft: isActive ? "2px solid #2589f5" : "",
 	};
-
 	return (
 		<HeaderCell {...rest} style={{ padding: 0 }}>
 			<div ref={ref} style={styles}>

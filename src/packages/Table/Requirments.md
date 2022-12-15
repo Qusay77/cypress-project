@@ -6,6 +6,6 @@
 
 # Cells can be custom and can have interactive elements
 
-# Row can be expanded and the expandable can be custom element
+# Row can be expanded and the expandable can be a custom element
 
 # Sort functionality can be customized
