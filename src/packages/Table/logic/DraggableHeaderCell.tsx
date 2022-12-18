@@ -1,9 +1,11 @@
+/** @jsxImportSource @emotion/react */
 import React from "react";
 import { useDrag, useDrop } from "react-dnd";
 import { Table } from "rsuite";
 import { ItemTypes } from "../constants";
 import { DraggableHeaderCellComponent, dropItem, dropOps } from "../types";
 const { HeaderCell } = Table;
+import { TableCellStyle } from "../styles";
 
 const DraggableHeaderCell = ({
 	children,
@@ -35,13 +37,12 @@ const DraggableHeaderCell = ({
 	drag(drop(ref));
 
 	const styles: React.CSSProperties = {
-		padding: "0.6rem 1rem",
 		cursor: "grab",
 		opacity: isDragging ? 0 : 1,
 		borderLeft: isActive ? "2px solid #2589f5" : "",
 	};
 	return (
-		<HeaderCell {...rest} style={{ padding: 0 }}>
+		<HeaderCell {...rest} css={TableCellStyle}>
 			<div ref={ref} style={styles}>
 				{children}
 			</div>

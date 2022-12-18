@@ -1,3 +1,4 @@
+/** @jsxImportSource @emotion/react */
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { Table, Pagination } from "rsuite";
@@ -9,10 +10,33 @@ import { useEffect, useState } from "react";
 const { Cell, Column } = Table;
 import sort from "../logic/sort";
 import { MainTableProps, RowDataProps } from "../types/index";
+import ExpandCell from "../logic/ExpandCell";
+import RenderRowExpanded from "./RenderRowExpanded";
 
 export default function MainTable({ fakeData }: MainTableProps) {
+	const rowKey = "id";
 	const [limit, setLimit] = useState(10);
 	const [page, setPage] = useState(1);
+	const [expandedRowKeys, setExpandedRowKeys] = useState<any>([]);
+
+	const handleExpanded = (rowData: RowDataProps) => {
+		let open = false;
+		const nextExpandedRowKeys = [];
+
+		expandedRowKeys.forEach((key: number) => {
+			if (key === rowData[rowKey]) {
+				open = true;
+			} else {
+				nextExpandedRowKeys.push(key);
+			}
+		});
+
+		if (!open) {
+			nextExpandedRowKeys.push(rowData[rowKey]);
+		}
+
+		setExpandedRowKeys(nextExpandedRowKeys);
+	};
 
 	const handleChangeLimit = (dataKey: number) => {
 		setPage(1);
@@ -45,15 +69,7 @@ export default function MainTable({ fakeData }: MainTableProps) {
 	};
 
 	const CompactCell = (props: RowDataProps) => {
-		return (
-			<Cell
-				{...props}
-				style={{
-					padding: 2,
-					borderTop: "1px solid red",
-				}}
-			/>
-		);
+		return <Cell {...props} style={{ marginTop: "10px" }} />;
 	};
 	const [sortColumn, setSortColumn] = useState();
 	const [sortType, setSortType] = useState();
@@ -91,7 +107,6 @@ export default function MainTable({ fakeData }: MainTableProps) {
 			<Table
 				autoHeight
 				data={getData()}
-				rowKey="id"
 				style={{ border: "1px solid #E6E6E6" }}
 				renderRow={(children, rowData) => {
 					return rowData ? (
@@ -112,6 +127,9 @@ export default function MainTable({ fakeData }: MainTableProps) {
 				sortType={sortType}
 				onSortColumn={handleSortColumn}
 				loading={loading}
+				rowKey={rowKey}
+				expandedRowKeys={expandedRowKeys}
+				renderRowExpanded={RenderRowExpanded}
 			>
 				{columns.map((column) => (
 					<Column
@@ -124,7 +142,16 @@ export default function MainTable({ fakeData }: MainTableProps) {
 						<DraggableHeaderCell onDrag={handleDragColumn} id={column.id}>
 							{column.name}
 						</DraggableHeaderCell>
-						<CompactCell dataKey={column.id} />
+						{column.id === "id" ? (
+							<ExpandCell
+								rowData={column}
+								dataKey="id"
+								expandedRowKeys={expandedRowKeys}
+								onChange={handleExpanded}
+							/>
+						) : (
+							<CompactCell dataKey={column.id} />
+						)}
 					</Column>
 				))}
 			</Table>
