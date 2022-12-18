@@ -10,9 +10,10 @@ const ExpandCell = ({
 	onChange,
 	...props
 }: {
-  rowData: any;
-  expandedRowKeys: [number];
-  onChange: Function;
+	rowData: any;
+	expandedRowKeys: [number];
+	// eslint-disable-next-line @typescript-eslint/ban-types
+	onChange: Function;
 }) => (
 	<Cell {...props} style={{ marginTop: "2px" }}>
 		<IconButton
