@@ -3,7 +3,6 @@
 
 npm run lint
 
-
 FILE=yarn.lock
 FILE2=storybook/yarn.lock
 if test -f "$FILE"; then
