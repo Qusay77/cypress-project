@@ -3,4 +3,12 @@
 
 npm run lint
 
-git reset yarn.lock storybook/yarn.lock
+FILE=yarn.lock
+FILE2=storybook/yarn.lock
+if test -f "$FILE"; then
+    git reset yarn.lock
+fi
+
+if test -f "$FILE2"; then
+    git reset storybook/yarn.lock
+fi
