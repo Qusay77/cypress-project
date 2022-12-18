@@ -3,4 +3,4 @@
 
 npm run lint
 
-git reset yarn.lock
+git reset yarn.lock storybook/yarn.lock
