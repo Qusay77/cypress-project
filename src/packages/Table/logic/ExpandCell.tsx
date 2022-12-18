@@ -5,30 +5,30 @@ import ExpandOutlineIcon from "@rsuite/icons/ExpandOutline";
 const rowKey = "id";
 const { Cell } = Table;
 const ExpandCell = ({
-  rowData,
-  expandedRowKeys,
-  onChange,
-  ...props
+	rowData,
+	expandedRowKeys,
+	onChange,
+	...props
 }: {
   rowData: any;
   expandedRowKeys: [number];
   onChange: Function;
 }) => (
-  <Cell {...props} style={{ marginTop: "2px" }}>
-    <IconButton
-      appearance="subtle"
-      onClick={() => {
-        onChange(rowData);
-      }}
-      icon={
-        expandedRowKeys.some((key: number) => key === rowData[rowKey]) ? (
-          <CollaspedOutlineIcon />
-        ) : (
-          <ExpandOutlineIcon />
-        )
-      }
-    />
-  </Cell>
+	<Cell {...props} style={{ marginTop: "2px" }}>
+		<IconButton
+			appearance="subtle"
+			onClick={() => {
+				onChange(rowData);
+			}}
+			icon={
+				expandedRowKeys.some((key: number) => key === rowData[rowKey]) ? (
+					<CollaspedOutlineIcon />
+				) : (
+					<ExpandOutlineIcon />
+				)
+			}
+		/>
+	</Cell>
 );
 
 export default ExpandCell;
