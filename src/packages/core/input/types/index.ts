@@ -1,6 +1,6 @@
 interface Style {
   [key: string]: {
-    [key: string]: string;
+    [key: string]: any;
   };
 }
 
