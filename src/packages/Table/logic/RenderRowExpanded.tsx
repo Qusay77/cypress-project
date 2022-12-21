@@ -1,8 +1,8 @@
-import { RowDataProps } from "../types";
+import { RowColumnDataProps } from "../types";
 import React from "react";
 
 const RenderRowExpanded = (
-	rowData: RowDataProps | undefined
+	rowData: RowColumnDataProps | undefined,
 ): React.ReactNode => {
 	return (
 		<div>

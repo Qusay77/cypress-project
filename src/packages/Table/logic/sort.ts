@@ -12,4 +12,4 @@ const sort = (source: Array<any>, sourceId: string, targetId: string) => {
 	return nextData;
 };
 
-export default sort;
+export { sort };

@@ -1,19 +1,19 @@
 import { IconButton, Table } from "rsuite";
-import CollaspedOutlineIcon from "@rsuite/icons/CollaspedOutline";
+import CollapsedOutlineIcon from "@rsuite/icons/CollaspedOutline";
 import ExpandOutlineIcon from "@rsuite/icons/ExpandOutline";
-
-const rowKey = "id";
+import { RowDataType, RowKeyType } from "../types";
 const { Cell } = Table;
 const ExpandCell = ({
 	rowData,
 	expandedRowKeys,
 	onChange,
+	rowKey = "id",
 	...props
 }: {
-	rowData: any;
-	expandedRowKeys: [number];
-	// eslint-disable-next-line @typescript-eslint/ban-types
-	onChange: Function;
+	rowData: RowDataType;
+	expandedRowKeys: number[];
+	onChange: (data: RowDataType) => void;
+	rowKey: RowKeyType;
 }) => (
 	<Cell {...props} style={{ marginTop: "2px" }}>
 		<IconButton
@@ -23,7 +23,7 @@ const ExpandCell = ({
 			}}
 			icon={
 				expandedRowKeys.some((key: number) => key === rowData[rowKey]) ? (
-					<CollaspedOutlineIcon />
+					<CollapsedOutlineIcon />
 				) : (
 					<ExpandOutlineIcon />
 				)

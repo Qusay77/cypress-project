@@ -61,6 +61,7 @@
 	"private": true,
 	"workspaces": [
 		"src/packages/**",
-		"src/router/**"
+		"src/router/**",
+		"store/**"
 	]
 }

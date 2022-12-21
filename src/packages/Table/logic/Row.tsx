@@ -5,7 +5,6 @@ import { useDrag, useDrop, DragSourceMonitor } from "react-dnd";
 
 const Row = ({ children, onDrag, rowData }: RowProps) => {
 	const ref = useRef(null);
-
 	const [{ canDrop }, drop] = useDrop<dropItem, void, dropOps>({
 		accept: ItemTypes.ROW,
 		collect: (monitor) => ({
