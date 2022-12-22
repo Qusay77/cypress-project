@@ -26,10 +26,10 @@ const TableColumn = ({
 			</DraggableHeaderCell>
 			{column.id === "id" ? (
 				<ExpandCell
+					rowExpandKey={rowKey}
 					rowData={column}
 					expandedRowKeys={expandedRowKeys}
 					onChange={handleExpanded}
-					rowKey={rowKey}
 				/>
 			) : (
 				<CompactCell dataKey={column.id} />

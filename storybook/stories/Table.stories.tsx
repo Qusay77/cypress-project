@@ -1,8 +1,7 @@
-import MainTable from "@packages/table";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { Provider } from "react-redux";
 import { store } from "@core/store";
-import useTable from "./../../src/hooks/useTable";
+import { useTable } from "@packages/table";
 
 const TableLOL = ({ tableProps }) => {
 	const { Table } = useTable({ tableProps });

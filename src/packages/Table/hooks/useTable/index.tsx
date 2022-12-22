@@ -1,16 +1,17 @@
 import { ReactNode, useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import MainTable, {
+import {
 	actions,
 	RenderRowExpanded,
 	RowColumnDataProps,
 	RowDataType,
 	sort,
 	SortType,
-} from "@packages/Table";
+	MainTable,
+} from "../../";
 import { RootState } from "store/types";
 import { TableHookProps } from "./types";
-import Row from "../../../src/packages/Table/logic/Row";
+import Row from "../../logic/Row";
 const useTable = ({ paginationProps, tableProps }: TableHookProps) => {
 	const {
 		setLimit,
@@ -97,7 +98,6 @@ const useTable = ({ paginationProps, tableProps }: TableHookProps) => {
 			}
 		}, 500);
 	};
-
 	const TableContainerProps = {
 		columns,
 		data: getData(),
@@ -105,6 +105,7 @@ const useTable = ({ paginationProps, tableProps }: TableHookProps) => {
 		sortType,
 		onSortColumn: handleSortColumn,
 		loading,
+		rowKey,
 		expandedRowKeys,
 		renderRowExpanded: RenderRowExpanded,
 		renderRow: (children?: ReactNode, rowData?: RowDataType | undefined) => {
@@ -137,7 +138,6 @@ const useTable = ({ paginationProps, tableProps }: TableHookProps) => {
 	useEffect(() => {
 		dispatch(setData(tableData as RowDataType[]));
 	}, [tableData]);
-
 	const Table = useMemo(
 		() => (
 			<MainTable
