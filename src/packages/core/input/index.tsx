@@ -9,7 +9,6 @@ export const InputCore = ({
 	type,
 	value,
 	setValue,
-	data,
 	styles,
 	error,
 	errorMessage,
