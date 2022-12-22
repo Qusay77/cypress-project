@@ -1,7 +1,7 @@
 import { RouteComponentProps } from "@reach/router";
 
 interface Routes extends RouteComponentProps {
-	Component: React.ReactElement;
+  Component: React.ReactElement;
 }
 
 const PageRoute = ({ Component }: Routes) => {
