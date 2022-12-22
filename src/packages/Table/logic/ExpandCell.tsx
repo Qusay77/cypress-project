@@ -10,9 +10,9 @@ const ExpandCell = ({
 	onChange,
 	...props
 }: {
-  rowData: any;
+  rowData: {[key: string] : string | number};
   expandedRowKeys: [number];
-  onChange: Function;
+  onChange: (arg1: {[key: string] : string | number}) => void;
 }) => (
 	<Cell {...props} style={{ marginTop: "2px" }}>
 		<IconButton

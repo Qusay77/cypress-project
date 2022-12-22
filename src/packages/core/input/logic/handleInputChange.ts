@@ -2,7 +2,7 @@ import { ChangeEvent } from "react";
 
 export default function handleInputChange(
 	event: ChangeEvent<HTMLInputElement>,
-	setValue: Function
+	setValue: (arg1: string) => void
 ) {
 	setValue(event.target.value);
 }

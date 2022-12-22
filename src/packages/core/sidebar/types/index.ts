@@ -18,5 +18,5 @@ export interface SideBarProps {
   right?: boolean | undefined;
   customBurgerIcon?: JSX.Element | false | undefined;
   id?: string | undefined;
-  setIsOpen?: Function | undefined;
+  setIsOpen?: () => void | undefined;
 }
