@@ -1,14 +1,14 @@
 # Usage
 
-- ** To use this package import package from "@packages/core-sidebar" and put it on the top of your component to cover all content in the bottom of it **
+-  To use this package import package from "@packages/core-sidebar" and put it on the top of your component to cover all content in the bottom of it 
 
-- ** You can send multiple children inside sidebar package to add it as content inside sidebar **
+-  You can send multiple children inside sidebar package to add it as content inside sidebar 
 
-- ** Default Value for this package to swap from left (If you want to change it send props right) **
+-  Default Value for this package to swap from left (If you want to change it send props right) 
 
-- ** You can change width as you want by send props width as string in % or px **
+-  You can change width as you want by send props width as string in % or px 
 
-- ** You Can Change Custom Burger Icon by send customBurgerIcon props (type of this prop boolean or html image) **
+-  You Can Change Custom Burger Icon by send customBurgerIcon props (type of this prop boolean or html image) 
 
 - For Example :-
 
