@@ -20,11 +20,19 @@ export const InputCore = ({
   switch (type) {
     case "text":
       return (
-        <>
-          <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <div style={{ width: styles?.input.width || "100%" }}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "baseline",
+            }}
+          >
             {label ? <Label style={styles?.label}>{label}</Label> : ""}
             {errorMessage && error ? (
-              <ErrorLabel style={styles?.error}>{errorMessage}</ErrorLabel>
+              <ErrorLabel style={{ ...styles?.error }}>
+                {errorMessage}
+              </ErrorLabel>
             ) : (
               ""
             )}
@@ -36,15 +44,23 @@ export const InputCore = ({
             placeholder={placeholder}
             styles={styles}
           />
-        </>
+        </div>
       );
     case "password":
       return (
-        <>
-          <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <div style={{ width: styles?.input.width || "100%" }}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "baseline",
+            }}
+          >
             {label ? <Label style={styles?.label}>{label}</Label> : ""}
             {errorMessage && error ? (
-              <ErrorLabel>{errorMessage}</ErrorLabel>
+              <ErrorLabel style={{ ...styles?.error }}>
+                {errorMessage}
+              </ErrorLabel>
             ) : (
               ""
             )}
@@ -55,7 +71,7 @@ export const InputCore = ({
             setValue={setValue}
             styles={styles}
           />
-        </>
+        </div>
       );
     case "dropDown":
       return (

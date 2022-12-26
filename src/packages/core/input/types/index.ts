@@ -13,7 +13,7 @@ type InputTypes = "text" | "password" | "dropDown";
 export interface InputProps {
   type: InputTypes;
   value: string | number;
-  setValue: () => void;
+  setValue: (value: string) => void;
   data?: Array<InputDataObject>;
   styles?: Style;
   error?: boolean;
@@ -22,7 +22,7 @@ export interface InputProps {
   placeholder?: string;
   children?: JSX.Element;
   isOpen: boolean;
-  setOpen: () => void;
+  setOpen: (value: boolean) => void;
 }
 
 export interface InputStyleProps {

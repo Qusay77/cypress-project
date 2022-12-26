@@ -4,11 +4,11 @@ import { Input } from "../styles";
 import { ChangeEvent } from "react";
 
 export default function Text({
-	value,
-	setValue,
-	error,
-	placeholder,
-	styles,
+  value,
+  setValue,
+  error,
+  placeholder,
+  styles,
 }: {
   value: InputProps["value"];
   setValue: InputProps["setValue"];
@@ -16,18 +16,18 @@ export default function Text({
   placeholder: InputProps["placeholder"];
   styles: InputProps["styles"];
 }) {
-	return (
-		<>
-			<Input
-				style={styles?.input}
-				placeholder={placeholder}
-				error={error}
-				errorColor={styles?.error?.color as string}
-				value={value}
-				onChange={(event: ChangeEvent<HTMLInputElement>) => {
-					handleInputChange(event, setValue);
-				}}
-			/>
-		</>
-	);
+  return (
+    <>
+      <Input
+        style={{ ...styles?.input, width: "-webkit-fill-available" }}
+        placeholder={placeholder}
+        error={error}
+        errorColor={styles?.error?.color as string}
+        value={value}
+        onChange={(event: ChangeEvent<HTMLInputElement>) => {
+          handleInputChange(event, setValue);
+        }}
+      />
+    </>
+  );
 }
