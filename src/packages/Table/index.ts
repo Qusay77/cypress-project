@@ -8,7 +8,7 @@ import {
 } from "./types";
 import { actions } from "./state";
 import { sort } from "./logic/sort";
-import RenderRowExpanded from "./logic/RenderRowExpanded";
+import RenderRowExpanded from "./ui/RenderRowExpanded";
 import useTable from "./hooks/useTable";
 export {
 	tableSlice as tableState,

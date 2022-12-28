@@ -1,7 +1,7 @@
 import { Table } from "rsuite";
-import DraggableHeaderCell from "../logic/DraggableHeaderCell";
-import ExpandCell from "../logic/ExpandCell";
+import DraggableHeaderCell from "./DraggableHeaderCell";
 import { RowColumnDataProps, TableColumnProps } from "../types";
+import ExpandCell from "./ExpandCell";
 const { Cell, Column } = Table;
 const CompactCell = (props: RowColumnDataProps) => {
 	return <Cell {...props} />;

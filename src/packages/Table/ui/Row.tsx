@@ -5,7 +5,7 @@ import { useDrag, useDrop, DragSourceMonitor } from "react-dnd";
 
 const Row = ({ children, onDrag, rowData }: RowProps) => {
 	const ref = useRef(null);
-	const [{ canDrop }, drop] = useDrop<dropItem, void, dropOps>({
+	const [{ canDrop, isOver }, drop] = useDrop<dropItem, void, dropOps>({
 		accept: ItemTypes.ROW,
 		collect: (monitor) => ({
 			isOver: monitor.isOver(),
@@ -23,7 +23,7 @@ const Row = ({ children, onDrag, rowData }: RowProps) => {
 			isDragging: monitor.isDragging(),
 		}),
 	});
-	const isActive = canDrop;
+	const isActive = canDrop && isOver;
 
 	drag(drop(ref));
 

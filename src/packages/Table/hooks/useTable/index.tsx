@@ -11,7 +11,7 @@ import {
 } from "../../";
 import { RootState } from "store/types";
 import { TableHookProps } from "./types";
-import Row from "../../logic/Row";
+import Row from "../../ui/Row";
 const useTable = ({ paginationProps, tableProps }: TableHookProps) => {
 	const {
 		setLimit,
