@@ -10,7 +10,8 @@
 		"prepare": "husky install .config/husky",
 		"storybook": "cd storybook && yarn storybook",
 		"build-storybook": "cd storybook && yarn build-storybook",
-		"cy:open": "cd cypressRoot && yarn cy:open"
+		"cy:open": "cd cypressRoot && yarn cy:open",
+		"all": "yarn && cd storybook && yarn && cd .. && cd cypressRoot && yarn"
 	},
 	"author": "",
 	"license": "ISC",
