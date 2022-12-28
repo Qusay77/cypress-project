@@ -59,15 +59,6 @@ const useTable = ({ paginationProps, tableProps }: TableHookProps) => {
 		const end = start + limit;
 		return i >= start && i < end;
 	});
-
-	const handleDragColumn = (sourceId: string, targetId: string) => {
-		dispatch(setColumns(sort(columns, sourceId, targetId)));
-	};
-
-	const handleDragRow = (sourceId: string, targetId: string) => {
-		dispatch(setData(sort(paginatedData, sourceId, targetId)));
-	};
-
 	const getData = (): RowDataType[] => {
 		if (sortColumn && sortType) {
 			return paginatedData.sort((a, b) => {
@@ -88,6 +79,15 @@ const useTable = ({ paginationProps, tableProps }: TableHookProps) => {
 		}
 		return data;
 	};
+	const sortedData = getData();
+	const handleDragColumn = (sourceId: string, targetId: string) => {
+		dispatch(setColumns(sort(columns, sourceId, targetId)));
+	};
+
+	const handleDragRow = (sourceId: string, targetId: string) => {
+		dispatch(setData(sort(paginatedData, sourceId, targetId)));
+	};
+
 	const handleSortColumn = (sortColumn: string, sortType?: SortType) => {
 		dispatch(setLoading(true));
 		setTimeout(() => {
@@ -100,7 +100,7 @@ const useTable = ({ paginationProps, tableProps }: TableHookProps) => {
 	};
 	const TableContainerProps = {
 		columns,
-		data: getData(),
+		data: sortedData,
 		sortColumn,
 		sortType,
 		onSortColumn: handleSortColumn,

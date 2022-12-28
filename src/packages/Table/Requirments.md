@@ -9,3 +9,17 @@
 # Row can be expanded and the expandable can be a custom element
 
 # Sort functionality can be customized
+
+
+# Pending Roadmap
+
+- make row drag working with while sorting other columns
+- pagination issues
+- custom elements as a prop
+- outside column handler
+- custom cells and column config
+- performance test
+- live update of data
+- search functionality
+- custom sorting functionality
+- sort default bug
