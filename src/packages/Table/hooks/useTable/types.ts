@@ -1,6 +1,8 @@
-import { PaginationProps, TableProps } from "rsuite";
+import { TableColumnsProps, ColumnProps } from "./../../types";
+import { PaginationProps } from "rsuite";
 
 export interface TableHookProps {
 	paginationProps: PaginationProps;
-	tableProps: TableProps;
+	tableProps: TableColumnsProps;
+	columnProps: ColumnProps;
 }

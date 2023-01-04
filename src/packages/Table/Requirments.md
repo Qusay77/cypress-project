@@ -10,16 +10,33 @@
 
 # Sort functionality can be customized
 
-
-# Pending Roadmap
+# Solved
 
 - make row drag working with while sorting other columns
 - pagination issues
-- custom elements as a prop
-- outside column handler
-- custom cells and column config
-- performance test
+- sort default bug - not a bug but its default for id columns
+- outside column handler - through storybook
 - live update of data
-- search functionality
+- custom elements as a prop
+- custom cells and column config
+
+# Pending Roadmap
+
 - custom sorting functionality
-- sort default bug
+- custom state handling and method accessability
+- serious handling for props vs state changes listeners
+- handle performance
+- search functionality - not available in library
+- custom pagination component support
+- cleanup
+- extra props for drag etc...
+- style input
+- error handling
+
+- meet design requirements
+- build story interfaces and docs
+
+# Tests
+
+# Status
+ - RED

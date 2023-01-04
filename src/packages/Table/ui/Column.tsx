@@ -4,7 +4,15 @@ import { RowColumnDataProps, TableColumnProps } from "../types";
 import ExpandCell from "./ExpandCell";
 const { Cell, Column } = Table;
 const CompactCell = (props: RowColumnDataProps) => {
-	return <Cell {...props} />;
+	const { CustomCell, ...rest } = props;
+	if (CustomCell) {
+		return (
+			<Cell {...rest}>
+				<CustomCell {...rest} />
+			</Cell>
+		);
+	}
+	return <Cell {...rest} />;
 };
 const TableColumn = ({
 	column,
@@ -12,6 +20,7 @@ const TableColumn = ({
 	expandedRowKeys,
 	handleExpanded,
 	rowKey,
+	customCells,
 }: TableColumnProps) => {
 	return (
 		<Column
@@ -32,7 +41,7 @@ const TableColumn = ({
 					onChange={handleExpanded}
 				/>
 			) : (
-				<CompactCell dataKey={column.id} />
+				<CompactCell CustomCell={customCells[column.id]} dataKey={column.id} />
 			)}
 		</Column>
 	);

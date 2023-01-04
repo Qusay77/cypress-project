@@ -27,6 +27,7 @@ export interface RowDataType {
 
 export interface TableColumnsProps extends TableProps {
 	columns: any[];
+	data: RowDataType[];
 }
 export type SortType = "desc" | "asc";
 export type RowKeyType = string | number;
@@ -61,6 +62,7 @@ export interface TableStateTypes {
 	sortColumn: string | undefined;
 	sortType: SortType | undefined;
 	loading: boolean;
+	[key: string]: any;
 }
 export interface ColumnProps {
 	handleDragColumn(sourceId: string, targetId: string): void;

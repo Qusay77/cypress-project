@@ -1,5 +1,6 @@
-import { ReactNode, useEffect, useMemo } from "react";
+import { ReactNode, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import useDeepCompareEffect from "use-deep-compare-effect";
 import {
 	actions,
 	RenderRowExpanded,
@@ -12,7 +13,26 @@ import {
 import { RootState } from "store/types";
 import { TableHookProps } from "./types";
 import Row from "../../ui/Row";
-const useTable = ({ paginationProps, tableProps }: TableHookProps) => {
+import { PaginationProps } from "rsuite";
+const useTable = ({
+	paginationProps,
+	tableProps,
+	columnProps,
+	rowProps,
+}: TableHookProps) => {
+	const {
+		data: tableData = [],
+		rowKey = "id",
+		columns: columnsData = [],
+		sortColumn: sortColumnProp,
+		sortType: sortTypeProp,
+		loading: loadingProp = false,
+		customCells,
+	} = tableProps || {};
+	const { limit: limitProp = 10, activePage: pageProp = 1 } = paginationProps;
+	const { expandedRowKeys: rowKeys = [] } = columnProps || {};
+	const { ExpandRow } = rowProps || {};
+
 	const {
 		setLimit,
 		setPage,
@@ -22,6 +42,7 @@ const useTable = ({ paginationProps, tableProps }: TableHookProps) => {
 		setSortColumn,
 		setSortType,
 		setLoading,
+		loadInitialState,
 	} = actions;
 	const {
 		limit,
@@ -33,8 +54,30 @@ const useTable = ({ paginationProps, tableProps }: TableHookProps) => {
 		sortType,
 		loading,
 	} = useSelector(({ table }: RootState) => table);
-	const { data: tableData, rowKey = "id" } = tableProps;
 	const dispatch = useDispatch();
+	useDeepCompareEffect(() => {
+		dispatch(
+			loadInitialState({
+				columns: columnsData,
+				data: tableData,
+				limit: limitProp,
+				page: pageProp,
+				expandedRowKeys: rowKeys,
+				sortColumn: sortColumnProp,
+				sortType: sortTypeProp,
+				loading: loadingProp,
+			}),
+		);
+	}, [
+		columnsData,
+		tableData,
+		limitProp,
+		pageProp,
+		rowKeys,
+		sortColumnProp,
+		sortTypeProp,
+		loadingProp,
+	]);
 	const handleExpanded = (rowData: RowColumnDataProps) => {
 		let open = false;
 		const nextExpandedRowKeys: Array<number> = [];
@@ -59,8 +102,9 @@ const useTable = ({ paginationProps, tableProps }: TableHookProps) => {
 		const end = start + limit;
 		return i >= start && i < end;
 	});
+	const [isDragRow, setIsDragRow] = useState(false);
 	const getData = (): RowDataType[] => {
-		if (sortColumn && sortType) {
+		if (sortColumn && sortType && !isDragRow) {
 			return paginatedData.sort((a, b) => {
 				let x = a[sortColumn];
 				let y = b[sortColumn];
@@ -77,7 +121,7 @@ const useTable = ({ paginationProps, tableProps }: TableHookProps) => {
 				}
 			});
 		}
-		return data;
+		return paginatedData;
 	};
 	const sortedData = getData();
 	const handleDragColumn = (sourceId: string, targetId: string) => {
@@ -85,10 +129,12 @@ const useTable = ({ paginationProps, tableProps }: TableHookProps) => {
 	};
 
 	const handleDragRow = (sourceId: string, targetId: string) => {
-		dispatch(setData(sort(paginatedData, sourceId, targetId)));
+		dispatch(setData(sort(data, sourceId, targetId)));
+		setIsDragRow(true);
 	};
 
 	const handleSortColumn = (sortColumn: string, sortType?: SortType) => {
+		setIsDragRow(false);
 		dispatch(setLoading(true));
 		setTimeout(() => {
 			dispatch(setLoading(false));
@@ -106,8 +152,11 @@ const useTable = ({ paginationProps, tableProps }: TableHookProps) => {
 		onSortColumn: handleSortColumn,
 		loading,
 		rowKey,
+		// height: 500,
+		autoHeight: true,
+		virtualized: true,
 		expandedRowKeys,
-		renderRowExpanded: RenderRowExpanded,
+		renderRowExpanded: ExpandRow ?? RenderRowExpanded,
 		renderRow: (children?: ReactNode, rowData?: RowDataType | undefined) => {
 			return rowData ? (
 				<Row
@@ -123,21 +172,34 @@ const useTable = ({ paginationProps, tableProps }: TableHookProps) => {
 			);
 		},
 	};
+	const paginationInit: PaginationProps = {
+		size: "xs",
+		prev: true,
+		next: true,
+		first: true,
+		last: true,
+		ellipsis: true,
+		boundaryLinks: true,
+		limit,
+		limitOptions: [10, 50, 100],
+		maxButtons: 5,
+		activePage: page,
+		layout: ["total", "-", "limit", "|", "pager", "skip"],
+		...paginationProps,
+		total: data.length,
+	};
 	const PagingContainerProps = {
 		onChangePage: (arg: number) => dispatch(setPage(arg)),
 		onChangeLimit: handleChangeLimit,
-		...paginationProps,
+		...paginationInit,
 	};
-
 	const ColumnContainerProps = {
 		handleDragColumn,
 		expandedRowKeys,
 		handleExpanded,
 		rowKey,
+		customCells,
 	};
-	useEffect(() => {
-		dispatch(setData(tableData as RowDataType[]));
-	}, [tableData]);
 	const Table = useMemo(
 		() => (
 			<MainTable

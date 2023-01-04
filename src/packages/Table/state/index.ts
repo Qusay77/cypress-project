@@ -7,12 +7,7 @@ const initialState: TableStateTypes = {
 	page: 1,
 	expandedRowKeys: [],
 	data: [],
-	columns: [
-		{ id: "id", name: "Id", width: 50, sortable: true },
-		{ id: "firstName", name: "First Name", flexGrow: 1, sortable: true },
-		{ id: "lastName", name: "Last Name", flexGrow: 1, sortable: true },
-		{ id: "email", name: "Email", flexGrow: 1, sortable: true },
-	],
+	columns: [],
 	sortColumn: undefined,
 	sortType: undefined,
 	loading: false,
@@ -44,6 +39,12 @@ const tableSlice = createSlice({
 		},
 		setLoading: (state, action: PayloadAction<boolean>) => {
 			state.loading = action.payload;
+		},
+		loadInitialState: (state, action: PayloadAction<TableStateTypes>) => {
+			const states = Object.entries(action.payload);
+			states.forEach((entry): void => {
+				state[entry[0]] = entry[1];
+			});
 		},
 	},
 });

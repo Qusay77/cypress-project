@@ -2,7 +2,7 @@ import { Table, TableProps } from "rsuite";
 
 const TableContainer = ({ children, renderRow, ...props }: TableProps) => {
 	return (
-		<Table autoHeight renderRow={renderRow} {...props}>
+		<Table renderRow={renderRow} {...props}>
 			{children}
 		</Table>
 	);

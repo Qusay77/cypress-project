@@ -17,5 +17,11 @@
 		"jsx": "react-jsx",
 		"jsxImportSource": "@emotion/react"
 	},
-	"include": ["src/**/*", "storybook/stories/*", "store"]
+	"include": [
+		"src/**/*",
+		"storybook/stories/*",
+		"store",
+		"storybook/stories/Table/Table.stories.tsx",
+		"storybook/stories/Table/mock.js"
+	]
 }
