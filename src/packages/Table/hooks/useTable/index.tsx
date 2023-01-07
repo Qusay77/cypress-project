@@ -11,6 +11,7 @@ const useTable = ({
 	rowProps,
 	extendedMethods,
 	customSort,
+	PaginationComponent,
 }: TableHookProps) => {
 	const {
 		data: tableData = [],
@@ -26,7 +27,7 @@ const useTable = ({
 	const { limit: limitProp = 10, activePage: pageProp = 1 } =
 		paginationProps || {};
 	const { expandedRowKeys: rowKeys = [] } = columnProps || {};
-	const { ExpandRow } = rowProps || {};
+	const { ExpandRow, draggable } = rowProps || {};
 
 	const { state, methods } = useMethodDistributer({
 		props: {
@@ -81,6 +82,7 @@ const useTable = ({
 					rowData={rowData}
 					id={rowData.id}
 					onDrag={handleDragRow}
+					draggable={draggable}
 				>
 					{children}
 				</Row>
@@ -121,9 +123,11 @@ const useTable = ({
 	const Table = useMemo(
 		() => (
 			<MainTable
-				paginationProps={PagingContainerProps}
 				tableProps={TableContainerProps}
 				columnProps={ColumnContainerProps}
+				{...(PaginationComponent
+					? { PaginationComponent }
+					: { paginationProps: PagingContainerProps })}
 			/>
 		),
 		[TableContainerProps, ColumnContainerProps, PagingContainerProps],

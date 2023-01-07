@@ -11,6 +11,7 @@ export default function MainTable({
 	paginationProps,
 	tableProps,
 	columnProps,
+	PaginationComponent,
 }: MainTableProps) {
 	const { columns, ...restTable } = tableProps;
 	return (
@@ -19,7 +20,10 @@ export default function MainTable({
 				{/* Huge child issue fixed by calling it as a function */}
 				{columns?.map((column) => TableColumn({ ...columnProps, column }))}
 			</TableContainer>
-			{paginationProps ? <TablePagination {...paginationProps} /> : null}
+			{paginationProps && !PaginationComponent ? (
+				<TablePagination {...paginationProps} />
+			) : null}
+			{PaginationComponent ? <PaginationComponent /> : null}
 		</DndProvider>
 	);
 }

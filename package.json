@@ -6,7 +6,7 @@
 		"prod": "rm -rf prod && parcel build public/index.html --dist-dir prod ",
 		"staging": "cross-env NODE_ENV=staging parcel build public/index.html --dist-dir staging ",
 		"dev": "parcel public/index.html",
-		"lint": "eslint --ext .js,.jsx,.tsx,.ts --fix ./src",
+		"lint": "eslint --ext .js,.jsx,.tsx,.ts --fix ./storybook ./src",
 		"prepare": "husky install .config/husky",
 		"storybook": "cd storybook && yarn storybook",
 		"build-storybook": "cd storybook && yarn build-storybook",

@@ -3,7 +3,7 @@ import { ItemTypes } from "../constants";
 import { useRef } from "react";
 import { useDrag, useDrop, DragSourceMonitor } from "react-dnd";
 
-const Row = ({ children, onDrag, rowData }: RowProps) => {
+const Row = ({ children, onDrag, rowData, draggable }: RowProps) => {
 	const ref = useRef(null);
 	const [{ canDrop, isOver }, drop] = useDrop<dropItem, void, dropOps>({
 		accept: ItemTypes.ROW,
@@ -37,7 +37,7 @@ const Row = ({ children, onDrag, rowData }: RowProps) => {
 	};
 
 	return (
-		<div ref={ref} style={styles}>
+		<div {...(draggable ? { ref } : {})} style={styles}>
 			{children}
 		</div>
 	);

@@ -11,7 +11,9 @@ import {
 import { actions } from "./state";
 import { sort } from "./logic/sort";
 import RenderRowExpanded from "./ui/RenderRowExpanded";
+import TablePagination from "./ui/TablePagination";
 import useTable from "./hooks/useTable";
+import { ModifiedPaginationProps } from "./hooks/useTable/types";
 export {
 	tableSlice as tableState,
 	actions,
@@ -19,6 +21,7 @@ export {
 	RenderRowExpanded,
 	useTable,
 	MainTable,
+	TablePagination,
 };
 export type {
 	TableStateTypes,
@@ -27,4 +30,5 @@ export type {
 	SortType,
 	TableHookProps,
 	CustomCellType,
+	ModifiedPaginationProps,
 };

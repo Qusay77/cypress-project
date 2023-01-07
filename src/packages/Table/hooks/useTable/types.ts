@@ -7,7 +7,7 @@ import {
 import { PaginationProps } from "rsuite";
 
 type Modify<T, R> = Omit<T, keyof R> & R;
-type ModifiedPaginationProps = Modify<
+export type ModifiedPaginationProps = Modify<
 	PaginationProps,
 	{
 		total?: number;
@@ -15,6 +15,7 @@ type ModifiedPaginationProps = Modify<
 >;
 export interface TableHookProps {
 	paginationProps?: ModifiedPaginationProps;
+	PaginationComponent?: () => JSX.Element;
 	tableProps?: TableColumnsProps;
 	columnProps?: ColumnProps;
 	rowProps?: RowPropsExternal;

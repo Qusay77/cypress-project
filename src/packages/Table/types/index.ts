@@ -29,9 +29,11 @@ export interface RowProps {
 	onDrag(sourceId: string, targetId: string): void;
 	id: string;
 	rowData: RowDataType;
+	draggable?: boolean;
 }
 export interface RowPropsExternal {
-	ExpandRow: ((rowData: RowDataType | undefined) => React.ReactNode) | null;
+	ExpandRow?: ((rowData: RowDataType | undefined) => React.ReactNode) | null;
+	draggable?: boolean;
 }
 
 // type Style = React.CSSProperties;
@@ -52,9 +54,10 @@ export interface DragRowProps {
 
 export interface MainTableProps {
 	// styles: { cell: Style };
-	paginationProps: PaginationProps;
+	paginationProps?: PaginationProps;
 	tableProps: TableColumnsProps;
 	columnProps: ColumnProps;
+	PaginationComponent?: () => JSX.Element;
 	// renderRow(props: DragRowProps): ReactNode;
 }
 
@@ -86,4 +89,5 @@ export interface ColumnProps {
 export interface TableColumnProps extends ColumnProps {
 	column: RowDataType;
 	customCells?: CustomCells;
+	draggable?: boolean;
 }

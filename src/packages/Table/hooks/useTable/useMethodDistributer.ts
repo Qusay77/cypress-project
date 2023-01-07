@@ -187,9 +187,9 @@ const useMethodDistributer = ({ props, extendedMethods, customSort }: any) => {
 	};
 
 	const handleDragRow = (sourceId: string, targetId: string) => {
+		setIsDragRow(true);
 		const body = () => {
 			dispatch(setData(sort(data, sourceId, targetId)));
-			setIsDragRow(true);
 		};
 		handleExtension(body, extendHandleDragRow);
 	};

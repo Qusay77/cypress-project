@@ -1,15 +1,3 @@
-# Columns are editable
-
-- swap between columns
-- columns can be added and removed
-- table is responsive when columns are edited
-
-# Cells can be custom and can have interactive elements
-
-# Row can be expanded and the expandable can be a custom element
-
-# Sort functionality can be customized
-
 # Solved
 
 - make row drag working with while sorting other columns
@@ -22,22 +10,37 @@
 - custom sorting functionality
 - custom state handling and method accessability
 - serious handling for props vs state changes listeners
+- search functionality - not available in library - external effect from container
+  Additional data can be added as a prop or handled separately
+  search function doesn't keep row drag state, unless its handled separately
+- states can be fully controlled by overwriting handler methods
+- custom pagination component support
+- toggle props for drag
 
 # Pending Roadmap
 
-- search functionality - not available in library
-- style input
-- custom pagination component support
-- extra props for drag etc...
-- error handling
-- handle performance
+  required
 
-- cleanup
+- custom expand cell Component
+- style input
+- error handling
+
+ prio
 
 - meet design requirements
 - build story interfaces and docs
 
+aftermath
+
+- cleanup/refactor
+- handle performance
+- share read of Table Effects to container
+- custom Row container component
+
 # Tests
 
+# Docs
+
 # Status
- - RED
+
+- RED

@@ -1,8 +1,15 @@
 import React, { useState } from "react";
 import NotRenderRowExpanded from "./notRenderRowExpanded";
 import CustomCell from "./customCell";
-import { useTable, TableHookProps, RowDataType } from "@packages/table";
+import {
+	useTable,
+	TableHookProps,
+	RowDataType,
+	// TablePagination,
+} from "@packages/table";
 import { mockUsers } from "./mock";
+import useDeepCompareEffect from "use-deep-compare-effect";
+// import { PaginationProps } from "rsuite";
 
 const defaultData = mockUsers(100);
 const originalColumns = [
@@ -20,10 +27,27 @@ const originalColumns = [
 const TableStoryExampleComponent = ({
 	tableProps,
 	paginationProps,
+	rowProps,
 	...props
 }: TableHookProps) => {
 	const [additionalData, setAdditionalData] = useState<RowDataType[]>([]);
 	const [counter, setCounter] = useState(1);
+	const [searchText, setSearchText] = useState("");
+	const [filteredData, setFilteredData] = useState(tableProps?.data);
+	useDeepCompareEffect(() => {
+		if (searchText.length) {
+			const isIncluded = (row: RowDataType) => {
+				const res = Object.values(row)
+					.map((r) => r.toString().toLowerCase())
+					.some((r) => r.indexOf(searchText.toLowerCase()) > -1);
+				return res;
+			};
+			const filter = tableProps?.data.filter(isIncluded);
+			setFilteredData(filter);
+		} else {
+			setFilteredData(tableProps?.data);
+		}
+	}, [searchText, tableProps?.data]);
 	const AddButton = () => {
 		const onClick = () => {
 			const newData = mockUsers(1);
@@ -35,7 +59,8 @@ const TableStoryExampleComponent = ({
 		return <button onClick={onClick}>click to add data</button>;
 	};
 
-	const { editableColumns, editableExpanded } = props;
+	const { editableColumns, editableExpanded, PaginationComponent } = props;
+	const { draggable } = rowProps || {};
 	const tablePropsEdit: TableHookProps["tableProps"] = {
 		...tableProps,
 		customCells: {
@@ -43,7 +68,7 @@ const TableStoryExampleComponent = ({
 		},
 		autoHeight: true,
 		virtualized: true,
-		data: tableProps?.data || [],
+		data: filteredData || [],
 		additionalData,
 		...(editableColumns && {
 			columns: originalColumns.filter((e) =>
@@ -60,14 +85,17 @@ const TableStoryExampleComponent = ({
 		// customSort: (e: any) =>  <div></div>,
 		tableProps: tablePropsEdit,
 		paginationProps,
+		PaginationComponent,
 		rowProps: {
 			ExpandRow: editableExpanded ? NotRenderRowExpanded : null,
+			draggable,
 		},
 	});
 	return (
 		<>
 			{Table}
 			<AddButton />
+			<input onChange={({ target }) => setSearchText(target.value)} />
 		</>
 	);
 };
@@ -79,10 +107,28 @@ const argTypes = {
 	},
 	editableExpanded: { control: "boolean" },
 };
-
+// const paginationInit: PaginationProps = {
+// 	size: "xs",
+// 	prev: true,
+// 	next: true,
+// 	first: true,
+// 	last: true,
+// 	ellipsis: true,
+// 	boundaryLinks: true,
+// 	limit: 10,
+// 	limitOptions: [10, 50, 100],
+// 	maxButtons: 5,
+// 	activePage: 1,
+// 	layout: ["total", "-", "limit", "|", "pager", "skip"],
+// 	total: 700,
+// };
 const args: TableHookProps = {
 	paginationProps: {
 		size: "xs",
+	},
+	// PaginationComponent: () => <TablePagination {...paginationInit} />,
+	rowProps: {
+		draggable: false,
 	},
 	tableProps: {
 		rowKey: "id",
