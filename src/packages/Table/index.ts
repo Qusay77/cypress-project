@@ -1,3 +1,5 @@
+import { CustomCellType } from "./types/index";
+import { TableHookProps } from "./hooks/useTable/types";
 import tableSlice from "./state";
 import MainTable from "./ui/MainTable";
 import {
@@ -18,4 +20,11 @@ export {
 	useTable,
 	MainTable,
 };
-export type { TableStateTypes, RowColumnDataProps, RowDataType, SortType };
+export type {
+	TableStateTypes,
+	RowColumnDataProps,
+	RowDataType,
+	SortType,
+	TableHookProps,
+	CustomCellType,
+};

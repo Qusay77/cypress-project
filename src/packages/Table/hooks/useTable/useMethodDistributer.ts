@@ -10,7 +10,7 @@ import {
 } from "../../";
 import { RootState } from "store/types";
 import useEffectDepListener from "./useEffectDepListener";
-import { mapValues, pickBy } from "lodash";
+import { mapValues, pickBy, unionBy } from "lodash";
 const handleExtension = (
 	body: () => void,
 	extendArgs: { overwrite: boolean; extendFunction: () => void },
@@ -27,7 +27,7 @@ const handleExtension = (
 		}
 	}
 };
-const useMethodDistributer = ({ props, extendedMethods }: any) => {
+const useMethodDistributer = ({ props, extendedMethods, customSort }: any) => {
 	const {
 		columnsData,
 		tableData,
@@ -38,6 +38,7 @@ const useMethodDistributer = ({ props, extendedMethods }: any) => {
 		sortTypeProp,
 		loadingProp,
 		rowKey,
+		additionalData,
 	} = props;
 	const {
 		handleSortColumn: extendHandleSortColumn,
@@ -46,7 +47,6 @@ const useMethodDistributer = ({ props, extendedMethods }: any) => {
 		handleExpanded: extendHandleExpanded,
 		handleChangeLimit: extendHandleChangeLimit,
 		onChangePage: extendOnChangePage,
-		customSort,
 	} = extendedMethods || {};
 	const {
 		setLimit,
@@ -80,12 +80,22 @@ const useMethodDistributer = ({ props, extendedMethods }: any) => {
 		sortColumnProp,
 		sortTypeProp,
 		loadingProp,
+		additionalData,
+	};
+
+	const handleChangesToData = (arr1: [], arr2: RowDataType[]) => {
+		return {
+			after: unionBy(arr1, arr2, "id"),
+		};
 	};
 	useEffectDepListener(
-		(changedDeps) => {
+		(changedDeps: { [key: string]: any }) => {
 			const changeConfig = {
 				columns: changedDeps["columnsData"],
-				data: changedDeps["tableData"],
+				data: handleChangesToData(
+					changedDeps["additionalData"]?.after || [],
+					changedDeps["tableData"]?.after || data,
+				),
 				limit: changedDeps["limitProp"],
 				page: changedDeps["pageProp"],
 				expandedRowKeys: changedDeps["rowKeys"],

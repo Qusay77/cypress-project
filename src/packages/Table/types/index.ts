@@ -6,28 +6,41 @@ export interface DraggableHeaderCellComponent {
 	onDrag(sourceId: string, targetId: string): void;
 	id: string;
 }
+export type CustomCellType = ({
+	rowData,
+	dataKey,
+}: {
+	rowData?: RowDataType;
+	dataKey: string;
+}) => JSX.Element;
 
-export interface RowColumnDataProps {
-	[key: string]: string | number | [] | undefined;
-}
+export type CustomCells = {
+	[key: string]: CustomCellType;
+};
+export type RowDataType = {
+	[key: string]: any;
+} & { dataKey?: string; children?: RowDataType[] };
+export type RowColumnDataProps = {
+	[key: string]: string | number | [] | undefined | CustomCellType;
+} & { rowData?: RowDataType; dataKey: string; CustomCell?: CustomCellType };
 
 export interface RowProps {
 	children: React.ReactNode;
 	onDrag(sourceId: string, targetId: string): void;
 	id: string;
-	rowData: RowColumnDataProps;
+	rowData: RowDataType;
+}
+export interface RowPropsExternal {
+	ExpandRow: ((rowData: RowDataType | undefined) => React.ReactNode) | null;
 }
 
 // type Style = React.CSSProperties;
-export interface RowDataType {
-	dataKey?: string;
-	children?: RowDataType[];
-	[key: string]: any;
-}
 
 export interface TableColumnsProps extends TableProps {
-	columns: any[];
+	columns?: { [key: string]: unknown }[];
 	data: RowDataType[];
+	customCells?: CustomCells;
+	additionalData?: RowDataType[];
 }
 export type SortType = "desc" | "asc";
 export type RowKeyType = string | number;
@@ -72,4 +85,5 @@ export interface ColumnProps {
 }
 export interface TableColumnProps extends ColumnProps {
 	column: RowDataType;
+	customCells?: CustomCells;
 }

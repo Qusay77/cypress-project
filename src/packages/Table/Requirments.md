@@ -26,12 +26,13 @@
 # Pending Roadmap
 
 - search functionality - not available in library
-- custom pagination component support
-- cleanup
-- extra props for drag etc...
 - style input
+- custom pagination component support
+- extra props for drag etc...
 - error handling
 - handle performance
+
+- cleanup
 
 - meet design requirements
 - build story interfaces and docs

@@ -10,6 +10,7 @@ const useTable = ({
 	columnProps,
 	rowProps,
 	extendedMethods,
+	customSort,
 }: TableHookProps) => {
 	const {
 		data: tableData = [],
@@ -19,9 +20,11 @@ const useTable = ({
 		sortType: sortTypeProp,
 		loading: loadingProp = false,
 		customCells,
+		additionalData,
 		...tablePropsRest
 	} = tableProps || {};
-	const { limit: limitProp = 10, activePage: pageProp = 1 } = paginationProps;
+	const { limit: limitProp = 10, activePage: pageProp = 1 } =
+		paginationProps || {};
 	const { expandedRowKeys: rowKeys = [] } = columnProps || {};
 	const { ExpandRow } = rowProps || {};
 
@@ -36,8 +39,10 @@ const useTable = ({
 			sortTypeProp,
 			loadingProp,
 			rowKey,
+			additionalData,
 		},
 		extendedMethods,
+		customSort,
 	});
 	const {
 		columns,

@@ -5,6 +5,7 @@ import ExpandCell from "./ExpandCell";
 const { Cell, Column } = Table;
 const CompactCell = (props: RowColumnDataProps) => {
 	const { CustomCell, ...rest } = props;
+
 	if (CustomCell) {
 		return (
 			<Cell {...rest}>
@@ -41,7 +42,10 @@ const TableColumn = ({
 					onChange={handleExpanded}
 				/>
 			) : (
-				<CompactCell CustomCell={customCells[column.id]} dataKey={column.id} />
+				<CompactCell
+					CustomCell={customCells?.[column.id]}
+					dataKey={column.id}
+				/>
 			)}
 		</Column>
 	);

@@ -1,8 +1,7 @@
-import React from "react";
-import { RowColumnDataProps } from "@packages/table";
+import { RowDataType } from "@packages/table";
 const NotRenderRowExpanded = (
-	rowData: RowColumnDataProps | undefined,
-): React.ReactNode => {
+	rowData: RowDataType | undefined,
+): JSX.Element => {
 	return (
 		<div>
 			<p>not email: {rowData?.email}</p>
