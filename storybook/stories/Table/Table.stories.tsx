@@ -38,6 +38,8 @@ const TableLOL = ({ tableProps, paginationProps, ...props }) => {
 		customCells: {
 			firstName: CustomCell,
 		},
+		autoHeight: true,
+		virtualized: true,
 		data: defData,
 		...(editableColumns && {
 			columns: originalColumns.filter((e) =>
@@ -46,6 +48,12 @@ const TableLOL = ({ tableProps, paginationProps, ...props }) => {
 		}),
 	};
 	const { Table } = useTable({
+		extendedMethods: {
+			handleExpanded: {
+				extendFunction: () => console.log("xisx"),
+			},
+			// customSort: (e) => console.log("lol", e),
+		},
 		tableProps: tablePropsEdit,
 		paginationProps,
 		rowProps: {

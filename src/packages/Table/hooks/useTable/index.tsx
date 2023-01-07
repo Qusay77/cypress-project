@@ -1,24 +1,15 @@
-import { ReactNode, useMemo, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import useDeepCompareEffect from "use-deep-compare-effect";
-import {
-	actions,
-	RenderRowExpanded,
-	RowColumnDataProps,
-	RowDataType,
-	sort,
-	SortType,
-	MainTable,
-} from "../../";
-import { RootState } from "store/types";
+import { ReactNode, useMemo } from "react";
+import { RenderRowExpanded, RowDataType, MainTable } from "../../";
 import { TableHookProps } from "./types";
 import Row from "../../ui/Row";
 import { PaginationProps } from "rsuite";
+import useMethodDistributer from "./useMethodDistributer";
 const useTable = ({
 	paginationProps,
 	tableProps,
 	columnProps,
 	rowProps,
+	extendedMethods,
 }: TableHookProps) => {
 	const {
 		data: tableData = [],
@@ -28,122 +19,46 @@ const useTable = ({
 		sortType: sortTypeProp,
 		loading: loadingProp = false,
 		customCells,
+		...tablePropsRest
 	} = tableProps || {};
 	const { limit: limitProp = 10, activePage: pageProp = 1 } = paginationProps;
 	const { expandedRowKeys: rowKeys = [] } = columnProps || {};
 	const { ExpandRow } = rowProps || {};
 
+	const { state, methods } = useMethodDistributer({
+		props: {
+			columnsData,
+			tableData,
+			limitProp,
+			pageProp,
+			rowKeys,
+			sortColumnProp,
+			sortTypeProp,
+			loadingProp,
+			rowKey,
+		},
+		extendedMethods,
+	});
 	const {
-		setLimit,
-		setPage,
-		setExpandedRowKeys,
-		setData,
-		setColumns,
-		setSortColumn,
-		setSortType,
-		setLoading,
-		loadInitialState,
-	} = actions;
-	const {
-		limit,
-		page,
-		expandedRowKeys,
-		data,
 		columns,
+		sortedData,
 		sortColumn,
 		sortType,
 		loading,
-	} = useSelector(({ table }: RootState) => table);
-	const dispatch = useDispatch();
-	useDeepCompareEffect(() => {
-		dispatch(
-			loadInitialState({
-				columns: columnsData,
-				data: tableData,
-				limit: limitProp,
-				page: pageProp,
-				expandedRowKeys: rowKeys,
-				sortColumn: sortColumnProp,
-				sortType: sortTypeProp,
-				loading: loadingProp,
-			}),
-		);
-	}, [
-		columnsData,
-		tableData,
-		limitProp,
-		pageProp,
-		rowKeys,
-		sortColumnProp,
-		sortTypeProp,
-		loadingProp,
-	]);
-	const handleExpanded = (rowData: RowColumnDataProps) => {
-		let open = false;
-		const nextExpandedRowKeys: Array<number> = [];
-		expandedRowKeys.forEach((key: number) => {
-			if (key === rowData[rowKey]) {
-				open = true;
-			} else {
-				nextExpandedRowKeys.push(key);
-			}
-		});
-		if (!open) {
-			nextExpandedRowKeys.push(rowData[rowKey] as number);
-		}
-		dispatch(setExpandedRowKeys(nextExpandedRowKeys));
-	};
-	const handleChangeLimit = (dataKey: number) => {
-		dispatch(setPage(1));
-		dispatch(setLimit(dataKey));
-	};
-	const paginatedData: RowDataType[] = data.filter((v, i: number) => {
-		const start = limit * (page - 1);
-		const end = start + limit;
-		return i >= start && i < end;
-	});
-	const [isDragRow, setIsDragRow] = useState(false);
-	const getData = (): RowDataType[] => {
-		if (sortColumn && sortType && !isDragRow) {
-			return paginatedData.sort((a, b) => {
-				let x = a[sortColumn];
-				let y = b[sortColumn];
-				if (typeof x === "string") {
-					x = x.charCodeAt(0);
-				}
-				if (typeof y === "string") {
-					y = y.charCodeAt(0);
-				}
-				if (sortType === "asc") {
-					return x - y;
-				} else {
-					return y - x;
-				}
-			});
-		}
-		return paginatedData;
-	};
-	const sortedData = getData();
-	const handleDragColumn = (sourceId: string, targetId: string) => {
-		dispatch(setColumns(sort(columns, sourceId, targetId)));
-	};
+		expandedRowKeys,
+		limit,
+		page,
+		data,
+	} = state;
+	const {
+		handleSortColumn,
+		handleDragRow,
+		handleDragColumn,
+		handleExpanded,
+		handleChangeLimit,
+		onChangePage,
+	} = methods;
 
-	const handleDragRow = (sourceId: string, targetId: string) => {
-		dispatch(setData(sort(data, sourceId, targetId)));
-		setIsDragRow(true);
-	};
-
-	const handleSortColumn = (sortColumn: string, sortType?: SortType) => {
-		setIsDragRow(false);
-		dispatch(setLoading(true));
-		setTimeout(() => {
-			dispatch(setLoading(false));
-			dispatch(setSortColumn(sortColumn));
-			if (sortType) {
-				dispatch(setSortType(sortType));
-			}
-		}, 500);
-	};
 	const TableContainerProps = {
 		columns,
 		data: sortedData,
@@ -152,9 +67,6 @@ const useTable = ({
 		onSortColumn: handleSortColumn,
 		loading,
 		rowKey,
-		// height: 500,
-		autoHeight: true,
-		virtualized: true,
 		expandedRowKeys,
 		renderRowExpanded: ExpandRow ?? RenderRowExpanded,
 		renderRow: (children?: ReactNode, rowData?: RowDataType | undefined) => {
@@ -171,6 +83,7 @@ const useTable = ({
 				children
 			);
 		},
+		...tablePropsRest,
 	};
 	const paginationInit: PaginationProps = {
 		size: "xs",
@@ -189,7 +102,7 @@ const useTable = ({
 		total: data.length,
 	};
 	const PagingContainerProps = {
-		onChangePage: (arg: number) => dispatch(setPage(arg)),
+		onChangePage,
 		onChangeLimit: handleChangeLimit,
 		...paginationInit,
 	};
