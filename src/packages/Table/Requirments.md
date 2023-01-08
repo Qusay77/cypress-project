@@ -1,6 +1,6 @@
 # Solved
 
-- make row drag working with while sorting other columns
+- make row drag working while keeping other columns sorted
 - pagination issues
 - sort default bug - not a bug but its default for id columns
 - outside column handler - through storybook
@@ -11,17 +11,21 @@
 - custom state handling and method accessability
 - serious handling for props vs state changes listeners
 - search functionality - not available in library - external effect from container
-  Additional data can be added as a prop or handled separately
-  search function doesn't keep row drag state, unless its handled separately
+- Additional data can be added as a prop or handled separately
+- search function doesn't keep row drag state, unless its handled separately
 - states can be fully controlled by overwriting handler methods
 - custom pagination component support
 - toggle props for drag
+- tooltip is cell defined
+- custom expand cell Component
+- custom sort icon - renderSortIcon
+- custom header interactive cells
 
-# Pending Roadmap
+## Pending Roadmap
 
   required
 
-- custom expand cell Component
+- custom loader
 - style input
 - error handling
 
@@ -32,15 +36,40 @@
 
 aftermath
 
-- cleanup/refactor
+- solution for prop drilling
 - handle performance
 - share read of Table Effects to container
 - custom Row container component
+- handle type duplications
+- cleanup/refactor
 
-# Tests
+  external components
 
-# Docs
+- Search input
+- add entry button
+- remove row cell
+- sort Icon
+- custom Header
+- Custom expand icon
+- custom Expand Components
+- column control component
+- fallback error components
+- loader
+- height retention when search is active
 
-# Status
+ story access to pick between multiple swap able components
+
+## Tests
+
+ main tests
+
+- responsiveness
+- adds and removes columns
+
+## Docs
+
+- this will be a long one
+
+## Status
 
 - RED

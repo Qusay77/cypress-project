@@ -28,6 +28,8 @@ const TableStoryExampleComponent = ({
 	tableProps,
 	paginationProps,
 	rowProps,
+	CustomSortIcon,
+	CustomHeaderCell,
 	...props
 }: TableHookProps) => {
 	const [additionalData, setAdditionalData] = useState<RowDataType[]>([]);
@@ -85,6 +87,12 @@ const TableStoryExampleComponent = ({
 		// customSort: (e: any) =>  <div></div>,
 		tableProps: tablePropsEdit,
 		paginationProps,
+		expandProps: {
+			columnId: "id",
+			// ExpandComponent,
+		},
+		CustomSortIcon,
+		CustomHeaderCell,
 		PaginationComponent,
 		rowProps: {
 			ExpandRow: editableExpanded ? NotRenderRowExpanded : null,
@@ -130,6 +138,8 @@ const args: TableHookProps = {
 	rowProps: {
 		draggable: false,
 	},
+	// CustomSortIcon: () => <>lol</>,
+	// CustomHeaderCell: () => <>lol</>,
 	tableProps: {
 		rowKey: "id",
 		data: defaultData,

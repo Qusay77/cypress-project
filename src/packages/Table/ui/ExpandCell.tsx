@@ -8,30 +8,48 @@ const ExpandCell = ({
 	expandedRowKeys,
 	onChange,
 	rowExpandKey,
+	ExpandComponent,
 	...props
 }: {
 	rowData: RowDataType;
 	expandedRowKeys: number[];
 	onChange: (data: RowDataType) => void;
 	rowExpandKey: RowKeyType;
+	ExpandComponent?: ({
+		rowData,
+		expandedRowKeys,
+		onChange,
+		rowExpandKey,
+	}: {
+		rowData: RowDataType;
+		expandedRowKeys: number[];
+		onChange: (data: RowDataType) => void;
+		rowExpandKey: RowKeyType;
+	}) => JSX.Element;
 }) => {
 	return (
-		<Cell {...props} style={{ marginTop: "2px" }}>
-			<IconButton
-				appearance="subtle"
-				onClick={() => {
-					onChange(rowData);
-				}}
-				icon={
-					expandedRowKeys.some(
-						(key: number) => key === rowData[rowExpandKey],
-					) ? (
-							<CollapsedOutlineIcon />
-						) : (
-							<ExpandOutlineIcon />
-						)
-				}
-			/>
+		<Cell {...props}>
+			{ExpandComponent ? (
+				<ExpandComponent
+					{...{ rowData, expandedRowKeys, onChange, rowExpandKey }}
+				/>
+			) : (
+				<IconButton
+					appearance="subtle"
+					onClick={() => {
+						onChange(rowData);
+					}}
+					icon={
+						expandedRowKeys.some(
+							(key: number) => key === rowData[rowExpandKey],
+						) ? (
+								<CollapsedOutlineIcon />
+							) : (
+								<ExpandOutlineIcon />
+							)
+					}
+				/>
+			)}
 		</Cell>
 	);
 };

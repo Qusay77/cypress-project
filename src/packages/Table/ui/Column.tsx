@@ -22,24 +22,33 @@ const TableColumn = ({
 	handleExpanded,
 	rowKey,
 	customCells,
+	expandProps,
+	CustomSortIcon,
+	CustomHeaderCell,
 }: TableColumnProps) => {
+	const { columnId, ExpandComponent } = expandProps || {};
 	return (
 		<Column
 			width={column.width}
 			key={column.id}
 			flexGrow={column.flexGrow}
-			align={column.id === "id" ? "center" : "left"}
+			align={column.align}
 			sortable={column.sortable}
 		>
-			<DraggableHeaderCell onDrag={handleDragColumn} id={column.id}>
-				{column.name}
+			<DraggableHeaderCell
+				CustomSortIcon={CustomSortIcon}
+				onDrag={handleDragColumn}
+				id={column.id}
+			>
+				{CustomHeaderCell ? <CustomHeaderCell column={column} /> : column.name}
 			</DraggableHeaderCell>
-			{column.id === "id" ? (
+			{column.id === columnId ? (
 				<ExpandCell
 					rowExpandKey={rowKey}
 					rowData={column}
 					expandedRowKeys={expandedRowKeys}
 					onChange={handleExpanded}
+					ExpandComponent={ExpandComponent}
 				/>
 			) : (
 				<CompactCell

@@ -3,6 +3,7 @@ import {
 	TableColumnsProps,
 	ColumnProps,
 	RowPropsExternal,
+	RowKeyType,
 } from "./../../types";
 import { PaginationProps } from "rsuite";
 
@@ -13,6 +14,18 @@ export type ModifiedPaginationProps = Modify<
 		total?: number;
 	}
 >;
+
+export type ExpandComponentProps = ({
+	rowData,
+	expandedRowKeys,
+	onChange,
+	rowExpandKey,
+}: {
+	rowData: RowDataType;
+	expandedRowKeys: number[];
+	onChange: (data: RowDataType) => void;
+	rowExpandKey: RowKeyType;
+}) => JSX.Element;
 export interface TableHookProps {
 	paginationProps?: ModifiedPaginationProps;
 	PaginationComponent?: () => JSX.Element;
@@ -28,4 +41,7 @@ export interface TableHookProps {
 	editableColumns?: string[];
 	editableExpanded?: boolean;
 	customSort?(...args: unknown[]): RowDataType;
+	expandProps?: { columnId: string; ExpandComponent?: ExpandComponentProps };
+	CustomSortIcon?: (sortType?: "desc" | "asc") => React.ReactNode;
+	CustomHeaderCell?: (column: RowDataType) => JSX.Element;
 }

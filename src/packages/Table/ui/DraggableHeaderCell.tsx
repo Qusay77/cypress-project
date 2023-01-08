@@ -11,6 +11,7 @@ const DraggableHeaderCell = ({
 	children,
 	onDrag,
 	id,
+	CustomSortIcon,
 	...rest
 }: DraggableHeaderCellComponent) => {
 	const ref = React.useRef(null);
@@ -42,7 +43,7 @@ const DraggableHeaderCell = ({
 		borderLeft: isActive ? "2px solid #2589f5" : "",
 	};
 	return (
-		<HeaderCell {...rest} css={TableCellStyle}>
+		<HeaderCell renderSortIcon={CustomSortIcon} {...rest} css={TableCellStyle}>
 			<div ref={ref} style={styles}>
 				{children}
 			</div>

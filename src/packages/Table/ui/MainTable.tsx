@@ -12,13 +12,24 @@ export default function MainTable({
 	tableProps,
 	columnProps,
 	PaginationComponent,
+	expandProps,
+	CustomSortIcon,
+	CustomHeaderCell,
 }: MainTableProps) {
 	const { columns, ...restTable } = tableProps;
 	return (
 		<DndProvider backend={HTML5Backend}>
 			<TableContainer {...restTable}>
 				{/* Huge child issue fixed by calling it as a function */}
-				{columns?.map((column) => TableColumn({ ...columnProps, column }))}
+				{columns?.map((column) =>
+					TableColumn({
+						...columnProps,
+						column,
+						expandProps,
+						CustomSortIcon,
+						CustomHeaderCell,
+					}),
+				)}
 			</TableContainer>
 			{paginationProps && !PaginationComponent ? (
 				<TablePagination {...paginationProps} />

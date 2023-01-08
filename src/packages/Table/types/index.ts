@@ -1,10 +1,14 @@
 import { ReactNode } from "react";
 import { PaginationProps, TableProps } from "rsuite";
+import { ExpandComponentProps } from "../hooks/useTable/types";
 
+export type SortType = "desc" | "asc";
+export type RowKeyType = string | number;
 export interface DraggableHeaderCellComponent {
 	children: React.ReactNode;
 	onDrag(sourceId: string, targetId: string): void;
 	id: string;
+	CustomSortIcon?: (sortType?: "desc" | "asc") => React.ReactNode;
 }
 export type CustomCellType = ({
 	rowData,
@@ -44,8 +48,6 @@ export interface TableColumnsProps extends TableProps {
 	customCells?: CustomCells;
 	additionalData?: RowDataType[];
 }
-export type SortType = "desc" | "asc";
-export type RowKeyType = string | number;
 
 export interface DragRowProps {
 	children?: ReactNode;
@@ -58,6 +60,9 @@ export interface MainTableProps {
 	tableProps: TableColumnsProps;
 	columnProps: ColumnProps;
 	PaginationComponent?: () => JSX.Element;
+	expandProps?: { columnId: string; ExpandComponent?: ExpandComponentProps };
+	CustomSortIcon?: (sortType?: "desc" | "asc") => React.ReactNode;
+	CustomHeaderCell?: (column: RowDataType) => JSX.Element;
 	// renderRow(props: DragRowProps): ReactNode;
 }
 
@@ -90,4 +95,7 @@ export interface TableColumnProps extends ColumnProps {
 	column: RowDataType;
 	customCells?: CustomCells;
 	draggable?: boolean;
+	expandProps?: { columnId: string; ExpandComponent?: ExpandComponentProps };
+	CustomSortIcon?: (sortType?: "desc" | "asc") => React.ReactNode;
+	CustomHeaderCell?: (column: RowDataType) => JSX.Element;
 }

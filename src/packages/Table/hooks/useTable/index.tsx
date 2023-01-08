@@ -12,6 +12,9 @@ const useTable = ({
 	extendedMethods,
 	customSort,
 	PaginationComponent,
+	expandProps,
+	CustomSortIcon,
+	CustomHeaderCell,
 }: TableHookProps) => {
 	const {
 		data: tableData = [],
@@ -128,6 +131,9 @@ const useTable = ({
 				{...(PaginationComponent
 					? { PaginationComponent }
 					: { paginationProps: PagingContainerProps })}
+				expandProps={expandProps}
+				CustomSortIcon={CustomSortIcon}
+				CustomHeaderCell={CustomHeaderCell}
 			/>
 		),
 		[TableContainerProps, ColumnContainerProps, PagingContainerProps],
