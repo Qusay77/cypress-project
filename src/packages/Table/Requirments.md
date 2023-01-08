@@ -68,6 +68,7 @@ aftermath
 
 ## Docs
 
+- each ts type can have docs and explanation's
 - this will be a long one
 
 ## Status
