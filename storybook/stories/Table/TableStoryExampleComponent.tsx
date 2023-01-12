@@ -136,7 +136,7 @@ const args: TableHookProps = {
 	},
 	// PaginationComponent: () => <TablePagination {...paginationInit} />,
 	rowProps: {
-		draggable: false,
+		draggable: true,
 	},
 	// CustomSortIcon: () => <>lol</>,
 	// CustomHeaderCell: () => <>lol</>,

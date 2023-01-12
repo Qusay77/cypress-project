@@ -25,6 +25,7 @@
 
   required
 
+- Header interactivity
 - custom loader
 - style input
 - error handling
@@ -58,6 +59,10 @@ aftermath
 - height retention when search is active
 
  story access to pick between multiple swap able components
+
+- setup assets
+- setup data generator to match design
+- dashboard variation
 
 ## Tests
 

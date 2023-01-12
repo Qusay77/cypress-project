@@ -1,11 +1,14 @@
 # Cypress and Storybook Project focused on component packages
 In other words its our take on [Monorepos](https://monorepo.tools/)
+
 ## _This Document is Under Heavy Construction!_
 
 This setup aims to achieve the ability to automate, deploy and test standalone building blocks for constant review and feedback through their development.
 
-# Stack
+## Stack
+
  Core 🔴
+
 - ReactJs 18+
 - Typescript 4.9+
 - Parcel  2.8+
