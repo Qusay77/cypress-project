@@ -11,7 +11,8 @@
 		"storybook": "cd storybook && yarn storybook",
 		"build-storybook": "cd storybook && yarn build-storybook",
 		"cy:open": "cd cypressRoot && yarn cy:open",
-		"all": "yarn && cd storybook && yarn && cd .. && cd cypressRoot && yarn"
+		"all": "yarn && cd storybook && yarn && cd .. && cd cypressRoot && yarn",
+		"chromatic": "npx chromatic --project-token=09c0471309a1"
 	},
 	"author": "",
 	"license": "ISC",
@@ -28,6 +29,8 @@
 		"@reach/router": "^1.3.4",
 		"@reduxjs/toolkit": "^1.9.0",
 		"babel-loader": "^9.1.0",
+		"chromatic": "^6.14.0",
+		"commitizen": "^4.2.6",
 		"eslint-plugin-import": "^2.26.0",
 		"eslint-plugin-jsx-a11y": "^6.6.1",
 		"eslint-plugin-react-hooks": "^4.6.0",
@@ -51,6 +54,7 @@
 		"@types/react-dom": "^18.0.9",
 		"@typescript-eslint/eslint-plugin": "^5.45.0",
 		"@typescript-eslint/parser": "^5.45.0",
+		"cz-conventional-changelog": "3.3.0",
 		"eslint": "^8.28.0",
 		"eslint-plugin-react": "^7.31.11",
 		"eslint-plugin-storybook": "^0.6.8",
@@ -61,5 +65,12 @@
 		"src/packages/**",
 		"src/router/**",
 		"store/**"
-	]
+	],
+	"readme": "ERROR: No README data found!",
+	"_id": "new-project@1.0.0",
+	"config": {
+		"commitizen": {
+			"path": "./node_modules/cz-conventional-changelog"
+		}
+	}
 }

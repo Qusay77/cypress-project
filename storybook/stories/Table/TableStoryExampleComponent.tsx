@@ -58,7 +58,7 @@ const TableStoryExampleComponent = ({
 			setAdditionalData([item]);
 			setCounter((prev) => prev + 1);
 		};
-		return <button onClick={onClick}>click to add data</button>;
+		return <button onClick={onClick}>click to add data 2</button>;
 	};
 
 	const { editableColumns, editableExpanded, PaginationComponent } = props;
