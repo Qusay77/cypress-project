@@ -1,0 +1,11 @@
+node_modules/
+build/
+dist/
+.parcel-cache/
+staging/
+.vscode/
+prod/
+build-storybook.log
+.yarn
+lerna-debug.log
+storybook-static

@@ -1,0 +1,12 @@
+{
+	"name": "@qusay77/router-main-router",
+	"main": "index.tsx",
+	"version": "0.0.0",
+	"repository": {
+		"url": "git+https://github.com/Qusay77/cypress-project.git",
+		"type": "git"
+	},
+	"publishConfig": {
+		"registry": "https://npm.pkg.github.com/@qusay77"
+	}
+}

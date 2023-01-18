@@ -1,0 +1,19 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+npm run lint
+
+FILE=yarn.lock
+FILE2=storybook/yarn.lock
+FILE3=cypressRoot/yarn.lock
+if test -f "$FILE"; then
+    git reset yarn.lock
+fi
+
+if test -f "$FILE2"; then
+    git reset storybook/yarn.lock
+fi
+
+if test -f "$FILE3"; then
+    git reset cypressRoot/yarn.lock
+fi

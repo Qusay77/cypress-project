@@ -1,0 +1,3 @@
+[submodule "storybook"]
+	path = storybook
+	url = https://github.com/Qusay77/cypress-project.git
