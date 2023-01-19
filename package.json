@@ -13,7 +13,7 @@
 		"cy:open": "cd cypressRoot && yarn cy:open",
 		"all": "yarn && cd storybook && yarn && cd .. && cd cypressRoot && yarn",
 		"chromatic": "npx chromatic --project-token=09c0471309a1",
-		"publish": "lerna publish from-package"
+		"publish-lerna": "npx lerna publish from-package"
 	},
 	"author": "",
 	"license": "ISC",
