@@ -1,7 +1,7 @@
 {
 	"name": "@qusay77/packages-button",
 	"main": "index.ts",
-	"version": "0.0.0",
+	"version": "0.0.1",
 	"repository": {
 		"url": "git+https://github.com/Qusay77/cypress-project.git",
 		"type": "git"
