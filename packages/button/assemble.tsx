@@ -30,7 +30,7 @@ const CoolButton = ({
 			style={{ backgroundColor }}
 			{...props}
 		>
-			{label} {extraText} 2
+			{label} {extraText}
 		</Button>
 	);
 };
