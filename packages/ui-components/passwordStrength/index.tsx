@@ -90,7 +90,7 @@ class PasswordStrengthBar extends React.Component<
 	}
 
 	private setScore = (): void => {
-		const { password, minLength, userInputs, onChangeScore } = this.props;
+		const { password, minLength = 0, userInputs, onChangeScore } = this.props;
 		let result = null;
 		let score = 0;
 		let feedback: PasswordFeedback = {};
@@ -119,7 +119,7 @@ class PasswordStrengthBar extends React.Component<
 			password,
 			barColors,
 			scoreWords,
-			minLength,
+			minLength = 0,
 			shortScoreWord,
 			itemStyle,
 			CustomIcon,
@@ -127,7 +127,7 @@ class PasswordStrengthBar extends React.Component<
 		} = this.props;
 		const { score } = this.state;
 		const newShortScoreWord =
-			password.length >= minLength ? scoreWords[score] : shortScoreWord;
+			password.length >= minLength ? scoreWords?.[score] : shortScoreWord;
 		return (
 			<div className={className} style={{ ...rootStyle, ...style }}>
 				<div style={wrapStyle}>
@@ -171,7 +171,7 @@ class PasswordStrengthBar extends React.Component<
 						style={{ ...descStyle, ...scoreWordStyle }}
 					>
 						{Number.isInteger(customGrade)
-							? scoreWords[customGrade]
+							? scoreWords?.[customGrade]
 							: newShortScoreWord}
 					</p>
 					<div style={{ margin: scoreWordStyle?.margin }}>
