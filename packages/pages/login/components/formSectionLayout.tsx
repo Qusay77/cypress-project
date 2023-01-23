@@ -40,6 +40,7 @@ const LoginText = styled.div`
 const ForgotPasswordBetweenContainer = styled.div`
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
 	margin-top: 25px;
 `;
 
@@ -55,6 +56,7 @@ const VarietyText = styled.p<VarietyTextProps>`
 			maxFont: fontSize,
 		})}
 	user-select: none;
+	height: fit-content;
 	cursor: ${({ isClickAble }) => (isClickAble ? "pointer" : "unset")};
 `;
 

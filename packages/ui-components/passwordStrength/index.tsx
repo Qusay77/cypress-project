@@ -164,6 +164,8 @@ class PasswordStrengthBar extends React.Component<
 						display: "flex",
 						justifyContent: "space-between",
 						alignItems: "center",
+						gap: "12px",
+						overflow: "hidden",
 					}}
 				>
 					<p

@@ -35,7 +35,7 @@ const InfoIconTooltip = () => {
 				<div
 					onMouseOver={() => setIsOpen(true)}
 					onMouseOut={() => setIsOpen(false)}
-					style={{ margin: "8px 0 0", cursor: "pointer" }}
+					style={{ cursor: "pointer" }}
 				>
 					<InfoIcon />
 				</div>
@@ -69,7 +69,11 @@ const PasswordStrength = () => {
 				margin: "8px 0 0",
 				textAlign: "left",
 			}}
-			style={{ width: "100%", height: "fit-content", marginTop: 15 }}
+			style={{
+				maxWidth: "100%",
+				height: "fit-content",
+				marginTop: 15,
+			}}
 			itemStyle={{ height: 8, borderRadius: 24 }}
 			customGrade={grade}
 			CustomIcon={InfoIconTooltip}
