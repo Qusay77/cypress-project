@@ -23,6 +23,7 @@
 		"store",
 		"storybook/stories/Table/Table.stories.tsx",
 		"storybook/stories/Table/mock.js",
-		"packages"
+		"packages",
+		"custom.d.ts"
 	]
 }
