@@ -24,14 +24,15 @@ const EmailLogin = ({ handleFlow }: { handleFlow: (flow: string) => void }) => {
 		clientId: "787nmmwpr0rfku",
 		redirectUri: "http://localhost:1234/linkedin",
 		onSuccess: async (code) => {
-			const result = await axios.post(
-				`${process.env.REACT_APP_API_KEY}v2/auth/social-login`,
-				{
-					type: "LINKEDIN",
-					token: code,
-				},
-			);
-			console.log(result);
+			console.log(code);
+			// 	const result = await axios.post(
+			// 		`${process.env.REACT_APP_API_KEY}v2/auth/social-login`,
+			// 		{
+			// 			type: "LINKEDIN",
+			// 			token: code,
+			// 		},
+			// 	);
+			// 	console.log(result);
 		},
 		onError: (error) => {
 			console.log(error);
