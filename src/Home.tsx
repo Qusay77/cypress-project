@@ -1,10 +1,7 @@
-import { CoolButton } from "@qusay77/packages-button";
-
 export default function Home() {
 	return (
 		<div className="App">
-			<>code</>
-			<CoolButton label="Code" />
+			<a href="/login">login</a>
 		</div>
 	);
 }

@@ -2,7 +2,6 @@ interface LoginStateTypes {
 	email: string;
 	password: string;
 	newPassword: string;
-	rememberMe: boolean;
 	orgName: string;
 	emailValidation: boolean;
 	passwordValidation: boolean;

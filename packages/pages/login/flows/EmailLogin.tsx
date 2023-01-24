@@ -10,17 +10,43 @@ import InputController from "../components/InputController";
 import { FormSectionContent } from "../components/pageLayout";
 import ForgotPassword from "./blocks/ForgotPassword";
 import { useLinkedIn } from "react-linkedin-login-oauth2";
+import { useLoginMutation } from "@qusay77/auth";
+import { useSelector } from "react-redux";
+import { LoginStateTypes } from "../types";
+import axios from "axios";
+
 const EmailLogin = ({ handleFlow }: { handleFlow: (flow: string) => void }) => {
+	const { email, password } = useSelector(
+		({ login }: { login: LoginStateTypes }) => login,
+	);
+
 	const { linkedInLogin } = useLinkedIn({
-		clientId: "77o33uwe8hz2do",
-		redirectUri: "https://portal.webeyez.com/auth/social-login", // for Next.js, you can use `${typeof window === 'object' && window.location.origin}/linkedin`
-		onSuccess: (code) => {
-			console.log(code);
+		clientId: "787nmmwpr0rfku",
+		redirectUri: "http://localhost:1234/linkedin",
+		onSuccess: async (code) => {
+			const result = await axios.post(
+				`${process.env.REACT_APP_API_KEY}v2/auth/social-login`,
+				{
+					type: "LINKEDIN",
+					token: code,
+				},
+			);
+			console.log(result);
 		},
 		onError: (error) => {
 			console.log(error);
 		},
 	});
+
+	const [login, { isLoading }] = useLoginMutation();
+	const handleEmailLogin = async () => {
+		const user = await login({
+			email,
+			password,
+		}).unwrap();
+		console.log(user, "lol");
+	};
+
 	return (
 		<FormSectionContent maxWidth={390}>
 			<HeaderIcon />
@@ -32,7 +58,12 @@ const EmailLogin = ({ handleFlow }: { handleFlow: (flow: string) => void }) => {
 			<InputController type="email" />
 			<InputController type="password" />
 			<ForgotPassword handleFlow={handleFlow} />
-			<FillButton invert={false} width={"100%"}>
+			<FillButton
+				disabled={isLoading}
+				onClick={handleEmailLogin}
+				invert={false}
+				width={"100%"}
+			>
 				Login
 			</FillButton>
 			<ForgotPasswordBetweenContainer>

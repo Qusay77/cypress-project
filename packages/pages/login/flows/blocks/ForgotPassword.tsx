@@ -6,8 +6,7 @@ import {
 	RememberMeBlock,
 	VarietyText,
 } from "../../components/formSectionLayout";
-import { actions } from "../../state";
-import { LoginStateTypes } from "../../types";
+import { actions, AuthStateTypes } from "@qusay77/auth";
 
 const ForgotPassword = ({
 	handleFlow,
@@ -15,7 +14,7 @@ const ForgotPassword = ({
 	handleFlow: (flow: string) => void;
 }) => {
 	const { rememberMe } = useSelector(
-		({ login }: { login: LoginStateTypes }) => login,
+		({ auth }: { auth: AuthStateTypes }) => auth,
 	);
 	const { setRememberMe } = actions;
 

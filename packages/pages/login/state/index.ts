@@ -8,7 +8,6 @@ const initialState: LoginStateTypes = {
 	password: "",
 	newPassword: "",
 	orgName: "",
-	rememberMe: false,
 	emailValidation: false,
 	passwordValidation: false,
 	newPasswordValidation: 0,
@@ -19,9 +18,7 @@ const LoginSlice = createSlice({
 	name: "Login",
 	initialState,
 	reducers: {
-		setRememberMe: (state, action: PayloadAction<boolean>) => {
-			state.rememberMe = action.payload;
-		},
+		
 		setEmail: (state, action: PayloadAction<string>) => {
 			const value = action.payload;
 			state.email = value;

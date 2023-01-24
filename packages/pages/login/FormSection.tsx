@@ -10,11 +10,6 @@ import SSOLogin from "./flows/SSOLogin";
 // import { LoginStateTypes } from "./types";
 
 const FormSection = ({ isNewPassword }: { isNewPassword: boolean }) => {
-	// const { login } = useSelector(
-	// 	({ login }: { login: LoginStateTypes }) => login,
-	// );
-	// const { email, password, newPassword, orgName } = login || {};
-	// const dispatch = useDispatch();
 	const [flow, setFlow] = useState(isNewPassword ? "newPassword" : "email");
 	const handleFlow = (flow: string) => {
 		setFlow(flow);
