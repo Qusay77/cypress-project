@@ -13,7 +13,7 @@ import { useLinkedIn } from "react-linkedin-login-oauth2";
 import { useLoginMutation } from "@qusay77/auth";
 import { useSelector } from "react-redux";
 import { LoginStateTypes } from "../types";
-import axios from "axios";
+// import axios from "axios";
 
 const EmailLogin = ({ handleFlow }: { handleFlow: (flow: string) => void }) => {
 	const { email, password } = useSelector(
