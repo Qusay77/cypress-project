@@ -13,14 +13,12 @@ interface CoolButtonProps {
 	size?: "small" | "medium" | "large";
 	label: string;
 	onClick?: () => void;
-	extraText?: string;
 }
 
 const CoolButton = ({
 	size = "medium",
 	backgroundColor,
 	label,
-	extraText,
 	...props
 }: CoolButtonProps) => {
 	return (
@@ -30,7 +28,7 @@ const CoolButton = ({
 			style={{ backgroundColor }}
 			{...props}
 		>
-			{label} {extraText}
+			{label}
 		</Button>
 	);
 };
