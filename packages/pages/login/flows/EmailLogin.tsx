@@ -22,7 +22,7 @@ const EmailLogin = ({ handleFlow }: { handleFlow: (flow: string) => void }) => {
 	const navigate = useNavigate();
 	const { linkedInLogin } = useLinkedIn({
 		clientId: "787nmmwpr0rfku",
-		redirectUri: "http://localhost:1234/auth/linkedin/callback",
+		redirectUri: `${window.location.origin}/auth/linkedin/callback`,
 		state: "2",
 		scope: "r_emailaddress,r_liteprofile",
 		onSuccess: async (code) => {
@@ -32,7 +32,7 @@ const EmailLogin = ({ handleFlow }: { handleFlow: (flow: string) => void }) => {
 					`${process.env.REACT_APP_API_KEY}v2/auth/social-login`,
 					{
 						type: "LINKEDIN",
-						redirectUrl: "http://localhost:1234/auth/linkedin/callback",
+						redirectUrl: `${window.location.origin}/auth/linkedin/callback`,
 						code,
 					},
 				);
