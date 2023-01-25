@@ -29,7 +29,7 @@ const EmailLogin = ({ handleFlow }: { handleFlow: (flow: string) => void }) => {
 			try {
 				console.log(code);
 				const result = await axios.post(
-					`${process.env.REACT_APP_API_KEY}v2/auth/social-login`,
+					`${process.env.REACT_APP_API_KEY}/v2/auth/social-login`,
 					{
 						type: "LINKEDIN",
 						redirectUrl: `${window.location.origin}/auth/linkedin/callback`,
