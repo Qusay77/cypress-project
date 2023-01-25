@@ -1,6 +1,5 @@
 import { VarietyText } from "../../components/formSectionLayout";
 import { TextWrapperContainer } from "../../components/pageLayout";
-
 const TextWrapper = ({
 	handleFlow,
 }: {
@@ -14,7 +13,9 @@ const TextWrapper = ({
 			&nbsp;
 			<VarietyText
 				isClickAble={true}
-				onClick={() => handleFlow("email")}
+				onClick={() => {
+					handleFlow("email");
+				}}
 				weight={800}
 				fontColor={"#1D99FF"}
 				fontSize={14}

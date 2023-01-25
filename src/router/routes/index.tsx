@@ -1,14 +1,27 @@
-import { Router } from "@reach/router";
 import Home from "../../Home";
 import LoginPage from "../../pages/Login";
-import { PageRoute } from "@qusay77/router-page-route";
 import { LinkedInCallback } from "react-linkedin-login-oauth2";
-export default function MainRouter() {
+import Login from "@qusay77/login-page";
+import { Routes, Route, Navigate } from "react-router-dom";
+
+const MainRouter = ({ isAccessValid }: { isAccessValid: boolean }) => {
 	return (
-		<Router>
-			<PageRoute Component={<Home />} path="/" />
-			<PageRoute Component={<LoginPage />} path="/login" />
-			<PageRoute Component={<LinkedInCallback />} path="/linkedin" />
-		</Router>
+		<Routes>
+			{isAccessValid ? (
+				<>
+					<Route index path="/" element={<Home />} />
+					<Route path="*" element={<Navigate to="/" replace />} />
+				</>
+			) : (
+				<>
+					<Route path="recovery" element={<Login isNewPassword={true} />} />
+					<Route path="login" element={<LoginPage />} />
+					<Route path="auth/linkedin/callback" element={<LinkedInCallback />} />
+					<Route path="*" element={<Navigate to="/login" replace />} />
+				</>
+			)}
+		</Routes>
 	);
-}
+};
+
+export default MainRouter;

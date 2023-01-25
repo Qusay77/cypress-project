@@ -13,39 +13,49 @@ import { useLinkedIn } from "react-linkedin-login-oauth2";
 import { useLoginMutation } from "@qusay77/auth";
 import { useSelector } from "react-redux";
 import { LoginStateTypes } from "../types";
-// import axios from "axios";
-
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 const EmailLogin = ({ handleFlow }: { handleFlow: (flow: string) => void }) => {
 	const { email, password } = useSelector(
 		({ login }: { login: LoginStateTypes }) => login,
 	);
-
+	const navigate = useNavigate();
 	const { linkedInLogin } = useLinkedIn({
 		clientId: "787nmmwpr0rfku",
-		redirectUri: "http://localhost:1234/linkedin",
+		redirectUri: "http://localhost:1234/auth/linkedin/callback",
+		state: "2",
+		scope: "r_emailaddress,r_liteprofile",
 		onSuccess: async (code) => {
-			console.log(code);
-			// 	const result = await axios.post(
-			// 		`${process.env.REACT_APP_API_KEY}v2/auth/social-login`,
-			// 		{
-			// 			type: "LINKEDIN",
-			// 			token: code,
-			// 		},
-			// 	);
-			// 	console.log(result);
+			try {
+				console.log(code);
+				const result = await axios.post(
+					`${process.env.REACT_APP_API_KEY}v2/auth/social-login`,
+					{
+						type: "LINKEDIN",
+						redirectUrl: "http://localhost:1234/auth/linkedin/callback",
+						code,
+					},
+				);
+				console.log(result);
+			} catch (e) {
+				console.log(e);
+			}
 		},
 		onError: (error) => {
 			console.log(error);
 		},
 	});
-
 	const [login, { isLoading }] = useLoginMutation();
 	const handleEmailLogin = async () => {
-		const user = await login({
+		const auth = await login({
 			email,
 			password,
 		}).unwrap();
-		console.log(user, "lol");
+		console.log(auth);
+		localStorage.setItem("accessToken", JSON.stringify(auth.access));
+		localStorage.setItem("refreshToken", JSON.stringify(auth.refresh));
+		window.dispatchEvent(new Event("storage"));
+		navigate("/");
 	};
 
 	return (

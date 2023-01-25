@@ -1,32 +1,33 @@
 import Checkbox from "@qusay77/checkbox";
 import { ChangeEvent } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import {
 	ForgotPasswordBetweenContainer,
 	RememberMeBlock,
 	VarietyText,
 } from "../../components/formSectionLayout";
-import { actions, AuthStateTypes } from "@qusay77/auth";
+import { useCookies } from "react-cookie";
 
 const ForgotPassword = ({
 	handleFlow,
 }: {
 	handleFlow: (flow: string) => void;
 }) => {
-	const { rememberMe } = useSelector(
-		({ auth }: { auth: AuthStateTypes }) => auth,
-	);
-	const { setRememberMe } = actions;
+	const [cookies, setCookie] = useCookies(["rememberMe"]);
+	const { rememberMe } = cookies;
 
-	const dispatch = useDispatch();
 	const handleRememberMe = (event: ChangeEvent<Element>) => {
-		dispatch(setRememberMe((event.target as HTMLInputElement).checked));
+		const expires = new Date();
+		expires.setTime(expires.getTime() + 2629800000);
+		setCookie("rememberMe", (event.target as HTMLInputElement).checked, {
+			path: "/",
+			expires,
+		});
 	};
 	return (
 		<ForgotPasswordBetweenContainer>
 			<RememberMeBlock>
 				<Checkbox
-					checked={rememberMe}
+					checked={rememberMe ? rememberMe === "true" : true}
 					onChange={(e) => handleRememberMe(e)}
 				></Checkbox>
 				<VarietyText weight={400} fontColor={"#808080"} fontSize={14}>

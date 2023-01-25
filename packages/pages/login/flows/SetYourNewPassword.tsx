@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux";
+import { useResetPasswordMutation } from "@qusay77/auth";
 import {
 	FillButton,
 	HeaderIcon,
@@ -10,15 +11,26 @@ import { FormSectionContent } from "../components/pageLayout";
 import PasswordStrength from "../components/PasswordStrength";
 import { LoginStateTypes } from "../types";
 import TextWrapper from "./blocks/TextWrapper";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const SetYourNewPassword = ({
 	handleFlow,
 }: {
 	handleFlow: (flow: string) => void;
 }) => {
-	const { grade } = useSelector(
+	const { grade, newPassword } = useSelector(
 		({ login }: { login: LoginStateTypes }) => login,
 	);
+	const navigate = useNavigate();
+	const location = useLocation();
+	const token = location.search.split("=")[1];
+	const [resetPassword, { isLoading }] = useResetPasswordMutation();
+	const handleResetPassword = async () => {
+		const res = await resetPassword({ password: newPassword, token });
+		if (res.data) {
+			navigate("/login");
+		}
+	};
 	return (
 		<FormSectionContent maxWidth={470}>
 			<HeaderIcon />
@@ -30,7 +42,12 @@ const SetYourNewPassword = ({
 			</LoginText>
 			<InputController type="newPassword" />
 			<PasswordStrength />
-			<FillButton disabled={grade < 3} invert={false} width={"100%"}>
+			<FillButton
+				onClick={handleResetPassword}
+				disabled={grade < 3 || isLoading}
+				invert={false}
+				width={"100%"}
+			>
 				Set New Password
 			</FillButton>
 			<TextWrapper handleFlow={handleFlow} />

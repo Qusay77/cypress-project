@@ -1,5 +1,8 @@
 import { fluidTypeTypes } from "./types";
-
+const vw = Math.max(
+	document.documentElement.clientWidth || 0,
+	window.innerWidth || 0,
+);
 export const fluidType = ({
 	minScreen,
 	maxScreen,
@@ -9,6 +12,8 @@ export const fluidType = ({
 	return `
       font-size: calc(${minFont}px + (${
 	maxFont - minFont
-}) * (100vw - ${minScreen}px)/(${maxScreen - minScreen}));
+}) * (100vw - ${minScreen}px)/(${
+	(vw > maxScreen ? vw : maxScreen) - minScreen
+}));
     `;
 };

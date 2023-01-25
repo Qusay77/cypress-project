@@ -13,17 +13,26 @@ const initialState: AuthStateTypes = {
 			token: null,
 		},
 	},
-	rememberMe: false,
+	rememberMe: true,
+	isLoggedIn: false,
 };
 const AuthSlice = createSlice({
-	name: "Login",
+	name: "Auth",
 	initialState,
 	reducers: {
+		setIsLoggedIn: (
+			state,
+			action: PayloadAction<AuthStateTypes["isLoggedIn"]>,
+		) => {
+			state.isLoggedIn = action.payload;
+		},
 		setAuth: (state, action: PayloadAction<AuthStateTypes["auth"]>) => {
 			state.auth = action.payload;
+			state.isLoggedIn = true;
 		},
 		setRememberMe: (state, action: PayloadAction<boolean>) => {
-			state.rememberMe = action.payload;
+			const value = action.payload;
+			state.rememberMe = value;
 		},
 		loadInitialState: (state, action: PayloadAction<AuthStateTypes>) => {
 			const states = Object.entries(action.payload);
