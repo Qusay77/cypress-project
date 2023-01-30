@@ -10,7 +10,7 @@
 		"registry": "https://npm.pkg.github.com/@qusay77"
 	},
 	"dependencies": {
-		"zxcvbn": "latest",
-		"@types/zxcvbn": "latest"
+		"@types/zxcvbn": "latest",
+		"zxcvbn": "latest"
 	}
 }
