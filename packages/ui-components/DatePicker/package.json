@@ -1,6 +1,6 @@
 {
-	"name": "@qusay77/password-strength",
-	"main": "index.tsx",
+	"name": "@qusay77/date-picker",
+	"main": "index.ts",
 	"version": "0.0.0",
 	"repository": {
 		"url": "git+https://github.com/Qusay77/cypress-project.git",
@@ -10,7 +10,9 @@
 		"registry": "https://npm.pkg.github.com/@qusay77"
 	},
 	"dependencies": {
-		"@types/zxcvbn": "latest",
-		"zxcvbn": "latest"
+		"react-dates": "^21.8.0"
+	},
+	"devDependencies": {
+		"@types/react-dates": "^21.8.0"
 	}
 }
