@@ -23,6 +23,7 @@ export const InputCore = ({
 				style={{
 					...styles?.container,
 					width: styles?.input.width || "100%",
+					minWidth : styles?.input.minWidth
 				}}
 			>
 				<div
