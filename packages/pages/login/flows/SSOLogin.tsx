@@ -10,7 +10,8 @@ import {
 	FormSectionContent,
 	TextWrapperContainer,
 } from "../components/pageLayout";
-
+import { theme } from "src/Globals/global";
+const { BluePrimary } = theme.colors;
 const SSOLogin = () => {
 	return (
 		<FormSectionContent maxWidth={460}>
@@ -28,7 +29,7 @@ const SSOLogin = () => {
 				<VarietyText
 					isClickAble={true}
 					weight={800}
-					fontColor={"#1D99FF"}
+					fontColor={BluePrimary}
 					fontSize={14}
 				>
 					Back to Login

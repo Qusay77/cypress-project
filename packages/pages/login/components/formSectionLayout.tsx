@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import { fluidType } from "@qusay77/fluid-typography";
 import WebEyezIcon from "../assets/WebeyeZ_Logo.svg";
 import { FillButtonProps, VarietyTextProps } from "./types";
 import Info from "../assets/Info.svg";
@@ -8,12 +7,7 @@ const HeaderText = styled.div`
 	line-height: 48.41px;
 	font-weight: 800;
 	height: 48px;
-	${fluidType({
-		minScreen: 260,
-		maxScreen: 1920,
-		minFont: 20,
-		maxFont: 40,
-	})}
+	${({ theme }) => theme.helpers.fontClamp(20, 40)}
 `;
 
 const HeaderIcon = styled.div`
@@ -29,12 +23,7 @@ const LoginText = styled.div`
 	margin-top: 16px;
 	line-height: 17px;
 	font-weight: 400;
-	${fluidType({
-		minScreen: 260,
-		maxScreen: 1920,
-		minFont: 7,
-		maxFont: 14,
-	})}
+	${({ theme }) => theme.helpers.fontClamp(7, 14)}
 `;
 
 const ForgotPasswordBetweenContainer = styled.div`
@@ -55,13 +44,17 @@ const VarietyText = styled.p<VarietyTextProps>`
 `;
 
 const FillButton = styled.div<FillButtonProps>`
-	background-color: ${({ invert, disabled }) =>
-		(disabled && "#E6E6E6") || (invert ? "#fff" : "#1d99ff")};
-	color: ${({ invert }) => (invert ? "#1d99ff" : "#fff")};
+	background-color: ${({ invert, disabled, theme }) =>
+		(disabled && theme.colors.Seperation) ||
+		(invert ? theme.colors.White : theme.colors.BluePrimary)};
+	color: ${({ invert, theme }) =>
+		invert ? theme.colors.BluePrimary : theme.colors.White};
 	width: ${({ width }) => width};
 	height: 48px;
 	border-radius: 24px;
-	border: 1px solid ${({ disabled }) => (disabled ? "#E6E6E6" : "#1d99ff")};
+	border: 1px solid
+		${({ disabled, theme }) =>
+		disabled ? theme.colors.Seperation : theme.colors.BluePrimary};
 	display: flex;
 	align-items: center;
 	justify-content: center;

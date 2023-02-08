@@ -26,5 +26,8 @@
 		"packages",
 		"custom.d.ts",
 		"emotion.d.ts"
-	]
+	],
+	"paths": {
+		"src/*": ["src/*"]
+	}
 }
