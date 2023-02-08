@@ -6,7 +6,8 @@ import {
 	VarietyText,
 } from "../../components/formSectionLayout";
 import { useCookies } from "react-cookie";
-
+import { theme } from "src/Globals/global";
+const { TextSecondary, BluePrimary } = theme.colors;
 const ForgotPassword = ({
 	handleFlow,
 }: {
@@ -30,7 +31,7 @@ const ForgotPassword = ({
 					checked={rememberMe ? rememberMe === "true" : true}
 					onChange={(e) => handleRememberMe(e)}
 				></Checkbox>
-				<VarietyText weight={400} fontColor={"#808080"} fontSize={14}>
+				<VarietyText weight={400} fontColor={TextSecondary} fontSize={14}>
 					Remember Me
 				</VarietyText>
 			</RememberMeBlock>
@@ -38,7 +39,7 @@ const ForgotPassword = ({
 				isClickAble={true}
 				onClick={() => handleFlow("forgotPassword")}
 				weight={400}
-				fontColor={"#1D99FF"}
+				fontColor={BluePrimary}
 				fontSize={14}
 			>
 				I Forgot my Password

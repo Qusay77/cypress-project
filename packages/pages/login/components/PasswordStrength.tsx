@@ -5,7 +5,8 @@ import { LoginStateTypes } from "../types";
 import { InfoIcon } from "./formSectionLayout";
 import TooltipContent from "./TooltipContent";
 import { useState } from "react";
-
+import { theme } from "src/Globals/global";
+const { GreenPrimary, TextSecondary, ErrorPrimary } = theme.colors;
 const InfoIconTooltip = () => {
 	const [isOpen, setIsOpen] = useState(false);
 	return (
@@ -53,7 +54,7 @@ const PasswordStrength = () => {
 	return (
 		<PasswordStrengthBar
 			password={password}
-			barColors={["#F4F4F4", "#DF2935", "#EFCA08", "#F49F0A", "#00E08F"]}
+			barColors={["#F4F4F4", ErrorPrimary, "#EFCA08", "#F49F0A", GreenPrimary]}
 			scoreWords={[
 				"Please enter a password",
 				"Very Weak, Must contain at least 8 characters",
@@ -62,7 +63,7 @@ const PasswordStrength = () => {
 				"Very Strong! Well done",
 			]}
 			scoreWordStyle={{
-				color: "#808080",
+				color: TextSecondary,
 				lineHeight: "15px",
 				fontSize: "12px",
 				fontWeight: 400,
