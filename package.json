@@ -78,7 +78,7 @@
 		"packages/**",
 		"src/router/**",
 		"src/services/**",
-		"store/*/**"
+		"store"
 	],
 	"config": {
 		"commitizen": {
