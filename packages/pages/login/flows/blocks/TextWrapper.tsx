@@ -1,5 +1,7 @@
 import { VarietyText } from "../../components/formSectionLayout";
 import { TextWrapperContainer } from "../../components/pageLayout";
+import { theme } from "src/Globals/global";
+const { TextSub, BluePrimary } = theme.colors;
 const TextWrapper = ({
 	handleFlow,
 }: {
@@ -7,7 +9,7 @@ const TextWrapper = ({
 }) => {
 	return (
 		<TextWrapperContainer>
-			<VarietyText weight={400} fontColor={"#B3B3B3"} fontSize={14}>
+			<VarietyText weight={400} fontColor={TextSub} fontSize={14}>
 				Remembered your Password?
 			</VarietyText>
 			&nbsp;
@@ -17,7 +19,7 @@ const TextWrapper = ({
 					handleFlow("email");
 				}}
 				weight={800}
-				fontColor={"#1D99FF"}
+				fontColor={BluePrimary}
 				fontSize={14}
 			>
 				Sign In!

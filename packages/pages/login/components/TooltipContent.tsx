@@ -1,9 +1,10 @@
 import styled from "@emotion/styled";
-import { fluidType } from "@qusay77/fluid-typography";
 import filled from "../assets/Checkbox-Filled.svg";
 import empty from "../assets/Checkbox-Empty.svg";
 import { useSelector } from "react-redux";
 import { LoginStateTypes } from "../types";
+import { theme } from "src/Globals/global";
+const { ButtonDisabled, TextSub, TextBody } = theme.colors;
 
 const Container = styled.div`
 	height: fit-content;
@@ -18,25 +19,15 @@ const Header = styled.div`
 	justify-content: flex-start;
 	align-items: center;
 	font-weight: 600;
-	border-bottom: 1px solid #e6e6e6;
-	${fluidType({
-		minScreen: 260,
-		maxScreen: 1920,
-		minFont: 8,
-		maxFont: 16,
-	})}
+	border-bottom: 1px solid ${ButtonDisabled};
+	${({ theme }) => theme.helpers.fontClamp(8, 16)}
 `;
 
 const Text = styled.p<{ disabled?: boolean }>`
 	line-height: 17px;
 	font-weight: 400;
-	${fluidType({
-		minScreen: 260,
-		maxScreen: 1920,
-		minFont: 7,
-		maxFont: 14,
-	})}
-	color: ${({ disabled }) => (disabled ? "#B3B3B3" : "#333333")};
+	${({ theme }) => theme.helpers.fontClamp(7, 14)}
+	color: ${({ disabled }) => (disabled ? TextSub : TextBody)};
 `;
 
 const ContentContainer = styled.div`
