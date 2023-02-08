@@ -24,6 +24,7 @@
 		"storybook/stories/Table/Table.stories.tsx",
 		"storybook/stories/Table/mock.js",
 		"packages",
-		"custom.d.ts"
+		"custom.d.ts",
+		"emotion.d.ts"
 	]
 }

@@ -48,13 +48,7 @@ const VarietyText = styled.p<VarietyTextProps>`
 	font-weight: ${({ weight }) => weight};
 	line-height: 17px;
 	color: ${({ fontColor }) => fontColor};
-	${({ fontSize }) =>
-		fluidType({
-			minScreen: 260,
-			maxScreen: 1920,
-			minFont: fontSize / 2,
-			maxFont: fontSize,
-		})}
+	${({ theme, fontSize }) => theme.helpers.fontClamp(fontSize / 2, fontSize)}
 	user-select: none;
 	height: fit-content;
 	cursor: ${({ isClickAble }) => (isClickAble ? "pointer" : "unset")};
