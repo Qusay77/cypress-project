@@ -113,7 +113,7 @@ const MarktingLayout = styled.div`
 
 const MarktingImage = styled.img`
   width: 100%;
-  height: -webkit-fill-available;
+  height: ${window.innerHeight}px;
   object-fit: cover;
 `;
 

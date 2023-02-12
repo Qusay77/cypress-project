@@ -9,6 +9,9 @@ export const LoginPageContainer = styled.div`
 export const LoginFormContainer = styled.div`
   padding-top: calc(20px + (160 - 20) * ((100vh - 720px) / (1080 - 720)));
   width: 50%;
+  display: grid;
+  align-content: space-between;
+  padding-bottom: 40px;
   @media (max-width: 768px) {
     padding: 50px;
     width: 100%;
@@ -67,8 +70,6 @@ export const LoginTermOfUse = styled.div`
   justify-content: center;
   display: inline-block;
   font-size: calc(12px + (14 - 12) * ((100vw - 320px) / (1920 - 320)));
-  margin-top: calc(20px + (111 - 20) * ((100vh - 720px) / (1080 - 720)));
-  margin-bottom: 40px;
   display: flex;
   flex-wrap: wrap;
   gap: 4px;
@@ -92,7 +93,7 @@ export const LoginMarktingLayout = styled.div`
 
 export const LoginMarktingImage = styled.img`
   width: 100%;
-  height: -webkit-fill-available;
+  height: ${window.innerHeight}px;
   object-fit: cover;
 `;
 
