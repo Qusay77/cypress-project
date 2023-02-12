@@ -1,7 +1,6 @@
-import { SideBarProps } from "./types";
 import { SideType } from "storybook/stories/Menu.stories";
-import { slide as Menu } from "react-burger-menu";
-// import "./styles/style.css";
+import { useNavigate } from "react-router-dom";
+
 import {
 	Body,
 	CardText,
@@ -29,13 +28,28 @@ import ImplementationIcon from "./Assets/icons-basic/menu-implementation-icon.sv
 import ImplementationIconColor from "./Assets/icons-color/menu-implementation-icon-color.svg";
 import UpdatesIcon from "./Assets/icons-basic/menu-updates-icon.svg";
 import UpdatesIconColor from "./Assets/icons-color/menu-updates-icon-color.svg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
 interface SampleProps {
-  menuElements: Array<SideType>;
+	menuElements: Array<SideType>;
 }
 
 export default function Side({ menuElements }: SampleProps) {
+	const navigateTo = useNavigate();
 	const [menuContant, setMenuContant] = useState(menuElements);
+
+	useEffect(() => {
+		menuContant.forEach((element, elementIndex) => {
+			if (
+				element?.label ===
+				window.location.href.split("/")[
+					window.location.href.split("/").length - 1
+				]
+			) {
+				handleActivatePage(elementIndex);
+			}
+		});
+	}, []);
 
 	const handleGetCardIcon = (label: string, isActive: boolean) => {
 		if (label === "Dashboard") {
@@ -90,7 +104,6 @@ export default function Side({ menuElements }: SampleProps) {
 	};
 
 	const handleActivatePage = (index: number) => {
-		console.log("123123", 123123);
 		const copy = menuContant?.map((el, i) => {
 			if (i === index) {
 				return {
@@ -104,6 +117,7 @@ export default function Side({ menuElements }: SampleProps) {
 				};
 			}
 		});
+
 		setMenuContant(copy);
 	};
 	return (
@@ -113,13 +127,13 @@ export default function Side({ menuElements }: SampleProps) {
 				<LogoWordIMG src={WebLogoWord} />
 			</LogoContainer>
 
-			{menuContant?.map((ele, index) => {
+			{menuContant?.map((ele) => {
 				return (
 					<>
 						{!ele.isActive ? (
 							<SectionCard
 								onClick={() => {
-									handleActivatePage(index);
+									navigateTo("/" + ele?.label);
 								}}
 							>
 								<img src={handleGetCardIcon(ele?.label, ele?.isActive)} />

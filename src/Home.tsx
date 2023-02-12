@@ -1,8 +1,9 @@
 import { useNavigate } from "react-router-dom";
+import AppLayout from "./layout/AppLayout";
 export default function Home() {
 	const navigate = useNavigate();
 	return (
-		<div className="App">
+		<AppLayout>
 			<button
 				onClick={async () => {
 					localStorage.removeItem("accessToken");
@@ -13,6 +14,6 @@ export default function Home() {
 			>
 				logout
 			</button>
-		</div>
+		</AppLayout>
 	);
 }
