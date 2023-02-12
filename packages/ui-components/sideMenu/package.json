@@ -1,0 +1,16 @@
+{
+	"name": "@qusay77/side-menu",
+	"main": "index.ts",
+	"version": "0.0.0",
+	"repository": {
+		"url": "git+https://github.com/Qusay77/cypress-project.git",
+		"type": "git"
+	},
+	"publishConfig": {
+		"registry": "https://npm.pkg.github.com/@qusay77"
+	},
+	"dependencies": {
+		"react-burger-menu": "^2.8.3",
+		"@types/react-burger-menu": "^2.8.3"
+	}
+}
