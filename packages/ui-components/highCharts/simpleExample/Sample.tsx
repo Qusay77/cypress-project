@@ -15,7 +15,7 @@ import {
 import DownArrow from "./Assits/Icons/arrow-circle-down.svg";
 import UpArrow from "./Assits/Icons/arrow-circle-up.svg";
 import { Collapse } from "react-collapse";
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { useNavigate } from "react-router-dom";
 interface SampleProps {
 	arrayOfObects: Array<orgsType>;
@@ -39,7 +39,7 @@ const Sample = ({ arrayOfObects, domains }: SampleProps) => {
 		<Body>
 			{orgs?.map((ele: orgsType, index: number) => {
 				return (
-					<>
+					<Fragment key={index}>
 						<Raw onClick={() => handleShowDomains(index)}>
 							<RowUpperContantWrapper>
 								<GreenLight />
@@ -55,7 +55,7 @@ const Sample = ({ arrayOfObects, domains }: SampleProps) => {
 							<HiddenArea>
 								{domains?.map((ele) => {
 									return (
-										<>
+										<Fragment key={`xx${ele.domain}`}>
 											<DomCard
 												onClick={() => {
 													navigateTo("/Sessions");
@@ -63,12 +63,12 @@ const Sample = ({ arrayOfObects, domains }: SampleProps) => {
 											>
 												<DomLink href="#">{ele?.domain}</DomLink>
 											</DomCard>
-										</>
+										</Fragment>
 									);
 								})}
 							</HiddenArea>
 						</Collapse>
-					</>
+					</Fragment>
 				);
 			})}
 		</Body>

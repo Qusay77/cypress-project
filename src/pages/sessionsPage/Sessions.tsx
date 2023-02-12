@@ -4,7 +4,7 @@ import { SessionsBody } from "./Theme";
 const Sessions = () => {
 	return (
 		<AppLayout>
-			<SessionsBody>Qusaaaay</SessionsBody>;
+			<SessionsBody>Session Analytics</SessionsBody>;
 		</AppLayout>
 	);
 };
