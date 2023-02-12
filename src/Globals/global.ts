@@ -34,6 +34,7 @@ const White = "#ffffff";
 const BluePrimary = "#1d99ff";
 const BlueText = "#00437a";
 const Blue10 = "#e8f5ff";
+const Blue70 = "#61B8FF";
 const IconBlue = "#1d99ff";
 const IconLight = "#c9c9c9";
 const MenuGray = "#97a6b2";
@@ -73,6 +74,7 @@ const theme = {
 		ButtonPrimary,
 		ButtonPressed,
 		ButtonDisabled,
+		Blue70,
 	},
 	helpers: {
 		fontClamp,
@@ -105,6 +107,7 @@ const GlobalStyles = css`
 		--Button-Primary: ${ButtonPrimary};
 		--Button-Pressed: ${ButtonPressed};
 		--Button-Disabled: ${ButtonDisabled};
+		--Blue-70: ${Blue70};
 	}
 	body {
 		font-family: Inter;

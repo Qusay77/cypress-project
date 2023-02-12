@@ -26,7 +26,8 @@
 		"storybook/stories/Table/mock.js",
 		"packages",
 		"custom.d.ts",
-		"emotion.d.ts"
+		"emotion.d.ts",
+		"storybook/.storybook/preview.tsx"
 	],
 	"paths": {
 		"src/*": ["src/*"]

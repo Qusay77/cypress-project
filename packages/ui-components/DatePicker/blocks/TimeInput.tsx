@@ -1,31 +1,10 @@
-import styled from "@emotion/styled";
 import { useEffect, useState } from "react";
+import {
+	EditableField,
+	TimeFieldBox,
+	Separator,
+} from "../components/TimeFieldComponents";
 
-const TimeFieldBox = styled.div`
-	width: 118px;
-	display: flex;
-	gap: 8px;
-`;
-const Separator = styled.div`
-	display: flex;
-	align-items: center;
-	color: #bbe0ff;
-	font-size: 24px;
-    font-weight:200;
-`;
-const EditableField = styled.input`
-	outline: 0px solid transparent;
-	width: 44px;
-	height: 33px;
-	border: 1px solid #e6e6e6 !important;
-	border-radius: 4px;
-	font-size: 14px;
-	color: #808080;
-	font-weight: 400;
-	line-height: 17px;
-	text-align: center;
-	letter-spacing: 1px;
-`;
 const TimeField = ({ value, callback }: any) => {
 	const [initialValue, setInitialValue] = useState<any>(null);
 	const [hours, setHours] = useState<any>(null);

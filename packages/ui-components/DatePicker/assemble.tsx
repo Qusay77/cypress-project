@@ -1,36 +1,31 @@
-import DateRangePicker from "./components/DateRangePicker";
-import styled from "@emotion/styled";
-import RangeMenu from "./components/RangeMenu";
-import TimeField from "./components/TimeInput";
+import DateRangePicker from "./blocks/DateRangePicker";
 import { useState } from "react";
-
-const PickerModalContent = styled.div`
-	width: 780px;
-	height: fit-content;
-	display: flex;
-	padding: 16px;
-`;
-
-const PickerContainer = styled.div`
-	padding: 0 16px;
-`;
-
-const TimeFieldContainer = styled.div`
-	flex: 1;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-`;
-const TimeFieldsBlock = styled.div`
-	display: flex;
-	width: 100%;
-	height: 65px;
-	border-bottom: 1px solid #e6e6e6;
-`;
+import RangeMenu from "./blocks/RangeMenu";
+import TimeField from "./blocks/TimeInput";
+import {
+	PickerContainer,
+	PickerModalContent,
+	TimeFieldContainer,
+	TimeFieldsBlock,
+} from "./components/MainComponents";
+import ApplyBlock from "./blocks/ApplyBlock";
+import { TimePickerType } from "./types";
 const DatePickerComponent = () => {
-	const [time, setTime] = useState<any>({ from: "00:00", to: "23:59" });
-	const handleTimeInput = async (value: any, type: any) => {
-		setTime((prev: any) => ({ ...prev, [type]: value }));
+	const [fromRange, setFromRange] = useState<TimePickerType>({
+		from: "00:00",
+		to: "23:59",
+	});
+	const [toRange, setToRange] = useState<TimePickerType>({
+		from: "00:00",
+		to: "23:59",
+	});
+	const handleTimeInput = async (value: string, type: string) => {
+		if (type === "from") {
+			setFromRange((prev: TimePickerType) => ({ ...prev, [type]: value }));
+		}
+		if (type === "to") {
+			setToRange((prev: TimePickerType) => ({ ...prev, [type]: value }));
+		}
 	};
 	return (
 		<PickerModalContent>
@@ -40,18 +35,18 @@ const DatePickerComponent = () => {
 				<TimeFieldsBlock>
 					<TimeFieldContainer>
 						<TimeField
-							value={time["from"]}
-							callback={(v: any) => handleTimeInput(v, "from")}
+							value={fromRange["from"]}
+							callback={(v: string) => handleTimeInput(v, "from")}
 						/>
 					</TimeFieldContainer>
 					<TimeFieldContainer>
 						<TimeField
-							value={time["from"]}
-							callback={(v: any) => handleTimeInput(v, "from")}
+							value={toRange["to"]}
+							callback={(v: string) => handleTimeInput(v, "from")}
 						/>
 					</TimeFieldContainer>
 				</TimeFieldsBlock>
-				<>Selected Time Frame</>
+				<ApplyBlock />
 			</PickerContainer>
 		</PickerModalContent>
 	);
