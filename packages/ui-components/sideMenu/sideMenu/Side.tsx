@@ -3,15 +3,15 @@ import { SideType } from "storybook/stories/Menu.stories";
 import { slide as Menu } from "react-burger-menu";
 // import "./styles/style.css";
 import {
-  Body,
-  CardText,
-  CardTextColor,
-  Line,
-  LogoContainer,
-  LogoIMG,
-  LogoWordIMG,
-  SectionCard,
-  SectionCardSelected,
+	Body,
+	CardText,
+	CardTextColor,
+	Line,
+	LogoContainer,
+	LogoIMG,
+	LogoWordIMG,
+	SectionCard,
+	SectionCardSelected,
 } from "./styles/Theme";
 import WebLogo from "./Assets/general-icons/webLogo.svg";
 import WebLogoWord from "./Assets/general-icons/webLogoWords.svg";
@@ -35,106 +35,106 @@ interface SampleProps {
 }
 
 export default function Side({ menuElements }: SampleProps) {
-  const [menuContant, setMenuContant] = useState(menuElements);
+	const [menuContant, setMenuContant] = useState(menuElements);
 
-  const handleGetCardIcon = (label: string, isActive: boolean) => {
-    if (label === "Dashboard") {
-      if (isActive) {
-        return DashBoardIconColor;
-      } else {
-        return DashBoardIcon;
-      }
-    }
-    if (label === "Business") {
-      if (isActive) {
-        return BusinessIconColor;
-      } else {
-        return BusinessIcon;
-      }
-    }
-    if (label === "Technology") {
-      if (isActive) {
-        return TechnologyIconColor;
-      } else {
-        return TechnologyIcon;
-      }
-    }
-    if (label === "Sessions") {
-      if (isActive) {
-        return SessionsIconColor;
-      } else {
-        return SessionsIcon;
-      }
-    }
-    if (label === "Alerts") {
-      if (isActive) {
-        return AlertsIconColor;
-      } else {
-        return AlertsIcon;
-      }
-    }
-    if (label === "Implementation") {
-      if (isActive) {
-        return ImplementationIconColor;
-      } else {
-        return ImplementationIcon;
-      }
-    }
-    if (label === "Updates") {
-      if (isActive) {
-        return UpdatesIconColor;
-      } else {
-        return UpdatesIcon;
-      }
-    }
-  };
+	const handleGetCardIcon = (label: string, isActive: boolean) => {
+		if (label === "Dashboard") {
+			if (isActive) {
+				return DashBoardIconColor;
+			} else {
+				return DashBoardIcon;
+			}
+		}
+		if (label === "Business") {
+			if (isActive) {
+				return BusinessIconColor;
+			} else {
+				return BusinessIcon;
+			}
+		}
+		if (label === "Technology") {
+			if (isActive) {
+				return TechnologyIconColor;
+			} else {
+				return TechnologyIcon;
+			}
+		}
+		if (label === "Sessions") {
+			if (isActive) {
+				return SessionsIconColor;
+			} else {
+				return SessionsIcon;
+			}
+		}
+		if (label === "Alerts") {
+			if (isActive) {
+				return AlertsIconColor;
+			} else {
+				return AlertsIcon;
+			}
+		}
+		if (label === "Implementation") {
+			if (isActive) {
+				return ImplementationIconColor;
+			} else {
+				return ImplementationIcon;
+			}
+		}
+		if (label === "Updates") {
+			if (isActive) {
+				return UpdatesIconColor;
+			} else {
+				return UpdatesIcon;
+			}
+		}
+	};
 
-  const handleActivatePage = (index: number) => {
-    console.log("123123", 123123);
-    let copy = menuContant?.map((el, i) => {
-      if (i === index) {
-        return {
-          ...el,
-          isActive: true,
-        };
-      } else {
-        return {
-          ...el,
-          isActive: false,
-        };
-      }
-    });
-    setMenuContant(copy);
-  };
-  return (
-    <Body>
-      <LogoContainer>
-        <LogoIMG src={WebLogo} />
-        <LogoWordIMG src={WebLogoWord} />
-      </LogoContainer>
+	const handleActivatePage = (index: number) => {
+		console.log("123123", 123123);
+		const copy = menuContant?.map((el, i) => {
+			if (i === index) {
+				return {
+					...el,
+					isActive: true,
+				};
+			} else {
+				return {
+					...el,
+					isActive: false,
+				};
+			}
+		});
+		setMenuContant(copy);
+	};
+	return (
+		<Body>
+			<LogoContainer>
+				<LogoIMG src={WebLogo} />
+				<LogoWordIMG src={WebLogoWord} />
+			</LogoContainer>
 
-      {menuContant?.map((ele, index) => {
-        return (
-          <>
-            {!ele.isActive ? (
-              <SectionCard
-                onClick={() => {
-                  handleActivatePage(index);
-                }}
-              >
-                <img src={handleGetCardIcon(ele?.label, ele?.isActive)} />
-                <CardText>{ele?.label}</CardText>
-              </SectionCard>
-            ) : (
-              <SectionCardSelected>
-                <img src={handleGetCardIcon(ele?.label, ele?.isActive)} />
-                <CardTextColor>{ele?.label}</CardTextColor>
-              </SectionCardSelected>
-            )}
-            {ele?.HasUnderLine && <Line />}
-          </>
-        );
-      })}
-    </Body>
-  );
+			{menuContant?.map((ele, index) => {
+				return (
+					<>
+						{!ele.isActive ? (
+							<SectionCard
+								onClick={() => {
+									handleActivatePage(index);
+								}}
+							>
+								<img src={handleGetCardIcon(ele?.label, ele?.isActive)} />
+								<CardText>{ele?.label}</CardText>
+							</SectionCard>
+						) : (
+							<SectionCardSelected>
+								<img src={handleGetCardIcon(ele?.label, ele?.isActive)} />
+								<CardTextColor>{ele?.label}</CardTextColor>
+							</SectionCardSelected>
+						)}
+						{ele?.HasUnderLine && <Line />}
+					</>
+				);
+			})}
+		</Body>
+	);
 }

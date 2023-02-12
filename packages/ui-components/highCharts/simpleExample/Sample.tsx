@@ -26,7 +26,7 @@ const Sample = ({ arrayOfObects, domains }: SampleProps) => {
 	const [doms, setdoms] = useState(domains);
 
 	const handleShowDomains = (index: number) => {
-		let tempArray = [...orgs].map((ele, i) => {
+		const tempArray = [...orgs].map((ele, i) => {
 			return {
 				...ele,
 				opened: index === i ? !ele?.opened : ele?.opened,
