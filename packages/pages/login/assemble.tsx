@@ -4,24 +4,10 @@ import {
 	PageContainer,
 	PageSection,
 } from "./components/pageLayout";
-import { Global, css } from "@emotion/react";
-
-const GlobalStyles = css`
-	@import url("https://fonts.googleapis.com/css?family=Inter");
-	@import url("https://fonts.googleapis.com/css2?family=Inter:wght@800&display=swap");
-	body {
-		font-family: Inter;
-		margin: 0;
-	}
-	p {
-		margin: 0;
-	}
-`;
 
 const Login = ({ isNewPassword }: { isNewPassword: boolean }) => {
 	return (
 		<PageContainer>
-			<Global styles={GlobalStyles} />
 			<PageSection>
 				<FormSection isNewPassword={isNewPassword} />
 			</PageSection>

@@ -15,7 +15,8 @@
 		"isolatedModules": true,
 		"baseUrl": ".",
 		"jsx": "react-jsx",
-		"jsxImportSource": "@emotion/react"
+		"jsxImportSource": "@emotion/react",
+		"types": ["node", "vite/client"]
 	},
 	"include": [
 		"src/**/*",
@@ -24,6 +25,11 @@
 		"storybook/stories/Table/Table.stories.tsx",
 		"storybook/stories/Table/mock.js",
 		"packages",
-		"custom.d.ts"
-	]
+		"custom.d.ts",
+		"emotion.d.ts",
+		"storybook/.storybook/preview.tsx"
+	],
+	"paths": {
+		"src/*": ["src/*"]
+	}
 }

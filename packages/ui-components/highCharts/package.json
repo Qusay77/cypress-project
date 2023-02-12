@@ -10,7 +10,7 @@
 		"registry": "https://npm.pkg.github.com/@qusay77"
 	},
 	"dependencies": {
-		"react-collapse": "^5.1.1",
-		"@types/react-collapse": "^5.0.1"
+		"@types/react-collapse": "^5.0.1",
+		"react-collapse": "^5.1.1"
 	}
 }

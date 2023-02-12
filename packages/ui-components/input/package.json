@@ -1,6 +1,6 @@
 {
 	"name": "@qusay77/core-input",
-	"main": "index.ts",
+	"main": "index.tsx",
 	"version": "0.0.0",
 	"repository": {
 		"url": "git+https://github.com/Qusay77/cypress-project.git",

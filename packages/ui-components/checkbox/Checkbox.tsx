@@ -1,44 +1,24 @@
-import styled from "@emotion/styled";
+import { ChangeEventHandler } from "react";
+import StyledCheckbox from "./components/StyledCheckbox";
+const color = "#1D99FF";
 
-interface CheckboxProps {
-	borderColor: string;
-	checkedColor: string;
-	hoverColor: string;
-}
+const Checkbox = ({
+	checked,
+	onChange,
+}: {
+	checked: boolean;
+	onChange: ChangeEventHandler;
+}) => {
+	return (
+		<StyledCheckbox
+			checked={checked}
+			onChange={onChange}
+			type="checkbox"
+			borderColor={color}
+			checkedColor={color}
+			hoverColor={color}
+		/>
+	);
+};
 
-const StyledCheckbox = styled.input<CheckboxProps>`
-	width: 16px;
-	height: 16px;
-	-webkit-appearance: none;
-	display: inline-block;
-	background: #ffffff;
-	border: 1px solid ${({ borderColor }) => borderColor};
-	display: flex;
-	justify-content: center;
-	border-radius: 5px;
-	&:after {
-		content: "";
-		display: inline-block;
-		position: relative;
-		width: 3px;
-		height: 9px;
-		border-bottom: 2px solid #fff;
-		border-right: 2px solid #fff;
-		transform: rotate(45deg);
-	}
-
-	&:checked {
-		background: ${({ checkedColor }) => checkedColor};
-		outline: none;
-	}
-	&:focus,
-	&:active {
-		outline: none;
-	}
-
-	&:hover {
-		outline: 1px solid ${({ hoverColor }) => hoverColor};
-	}
-`;
-
-export default StyledCheckbox;
+export default Checkbox;

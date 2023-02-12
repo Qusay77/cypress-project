@@ -10,7 +10,7 @@
 		"registry": "https://npm.pkg.github.com/@qusay77"
 	},
 	"dependencies": {
-		"react-burger-menu": "^2.8.3",
-		"@types/react-burger-menu": "^2.8.3"
+		"@types/react-burger-menu": "^2.8.3",
+		"react-burger-menu": "^2.8.3"
 	}
 }

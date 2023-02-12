@@ -26,8 +26,8 @@ const SetYourNewPassword = ({
 	const token = location.search.split("=")[1];
 	const [resetPassword, { isLoading }] = useResetPasswordMutation();
 	const handleResetPassword = async () => {
-		const res:any = await resetPassword({ password: newPassword, token });
-		if (res.data) {
+		const res = await resetPassword({ password: newPassword, token });
+		if ("data" in res) {
 			navigate("/login");
 		}
 	};

@@ -42,7 +42,7 @@ interface LoginType {
 export const loginApi = createApi({
 	reducerPath: "loginAuth",
 	baseQuery: fetchBaseQuery({
-		baseUrl: process.env.REACT_APP_API_KEY,
+		baseUrl: import.meta.env.REACT_APP_API_KEY,
 		prepareHeaders: (headers, { getState }) => {
 			// By default, if we have a token in the store, let's use that for authenticated requests
 			const token = (getState() as RootState).auth.token;

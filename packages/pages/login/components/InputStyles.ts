@@ -1,5 +1,6 @@
 import { InputProps } from "@qusay77/core-input";
-
+import { theme } from "src/Globals/global";
+const { TextBody, TextSecondary, ErrorPrimary } = theme.colors;
 const shared = {
 	styles: {
 		container: {
@@ -9,7 +10,7 @@ const shared = {
 			fontWeight: "400",
 			fontSize: "14px",
 			lineHeight: "17px",
-			color: "#333333",
+			color: TextBody,
 			width: "100%",
 		},
 		label: {
@@ -17,10 +18,10 @@ const shared = {
 			fontSize: "12px",
 			lineHeight: "15px",
 			textTransform: "capitalize",
-			color: "#808080",
+			color: TextSecondary,
 		},
 		error: {
-			color: "#D83928",
+			color: ErrorPrimary,
 		},
 	},
 };
