@@ -10,21 +10,24 @@ export const InputLayout = `
 `;
 
 export const Label = styled.p`
-	font-size: 12px;
-	font-weight: 400;
-	margin: 0;
-	margin-bottom: 8px;
-	color: #808080;
+  font-size: 12px;
+  font-weight: 400;
+  margin: 0;
+  margin-bottom: 8px;
+  color: #808080;
 `;
 
 export const ErrorLabel = styled(Label)`
-	color: #d83928;
+  color: #d83928;
 `;
 
 export const Input = styled.input`
-	${InputLayout}
-	width: calc(100% - 32px);
-	border: ${(props: InputStyleProps) =>
+  ${InputLayout}
+  ::placeholder {
+    color: #b3b3b3;
+  }
+  width: calc(100% - 32px);
+  border: ${(props: InputStyleProps) =>
 		props.error ? `1px solid ${props.errorColor}` || "1px solid #D83928;" : ""};
 `;
 

@@ -65,7 +65,7 @@ const FillButton = styled.div<FillButtonProps>`
 `;
 
 const RememberMeBlock = styled.div`
-	display: flex;
+	display: none;
 	justify-content: space-between;
 	align-items: center;
 	gap: 12px;

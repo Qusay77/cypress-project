@@ -1,4 +1,4 @@
-const showIcon = (
+const hideIcon = (
 	<svg
 		width="20"
 		height="20"
@@ -21,7 +21,7 @@ const showIcon = (
 	</svg>
 );
 
-const hideIcon = (
+const showIcon = (
 	<svg
 		width="20"
 		height="20"
