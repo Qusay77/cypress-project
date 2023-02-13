@@ -28,7 +28,7 @@ import ImplementationIcon from "./Assets/icons-basic/menu-implementation-icon.sv
 import ImplementationIconColor from "./Assets/icons-color/menu-implementation-icon-color.svg";
 import UpdatesIcon from "./Assets/icons-basic/menu-updates-icon.svg";
 import UpdatesIconColor from "./Assets/icons-color/menu-updates-icon-color.svg";
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 
 interface SampleProps {
 	menuElements: Array<SideType>;
@@ -129,7 +129,7 @@ export default function Side({ menuElements }: SampleProps) {
 
 			{menuContant?.map((ele) => {
 				return (
-					<>
+					<Fragment key={ele.label}>
 						{!ele.isActive ? (
 							<SectionCard
 								onClick={() => {
@@ -146,7 +146,7 @@ export default function Side({ menuElements }: SampleProps) {
 							</SectionCardSelected>
 						)}
 						{ele?.HasUnderLine && <Line />}
-					</>
+					</Fragment>
 				);
 			})}
 		</Body>
