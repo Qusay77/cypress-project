@@ -8,6 +8,8 @@ interface LoginStateTypes {
 	newPasswordValidation: number;
 	grade: number;
 	specifics: Array<boolean>;
+	isEmailErrorActive: boolean;
+	isPasswordErrorActive: boolean;
 	[key: string]: unknown;
 }
 

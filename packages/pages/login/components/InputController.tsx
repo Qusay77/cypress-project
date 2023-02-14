@@ -13,6 +13,8 @@ const InputController = ({ type }: { type: string }) => {
 		orgName,
 		emailValidation,
 		passwordValidation,
+		isEmailErrorActive,
+		isPasswordErrorActive,
 	} = useSelector(({ login }: { login: LoginStateTypes }) => login) || {};
 	const { setEmail, setPassword, setNewPassword, setOrgName } = actions;
 	const typeObj: {
@@ -25,12 +27,16 @@ const InputController = ({ type }: { type: string }) => {
 		email: {
 			value: email,
 			setter: setEmail,
-			error: email.length ? !emailValidation : false,
+			error:
+				(isEmailErrorActive && emailValidation) ||
+				(isEmailErrorActive && !email.length),
 		},
 		password: {
 			value: password,
 			setter: setPassword,
-			error: password.length ? !passwordValidation : false,
+			error:
+				(isPasswordErrorActive && passwordValidation) ||
+				(isPasswordErrorActive && !password.length),
 		},
 		newPassword: {
 			value: newPassword,

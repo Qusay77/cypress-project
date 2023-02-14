@@ -1,5 +1,4 @@
 import DateRangePicker from "./blocks/DateRangePicker";
-import { useState } from "react";
 import RangeMenu from "./blocks/RangeMenu";
 import TimeField from "./blocks/TimeInput";
 import {
@@ -9,24 +8,26 @@ import {
 	TimeFieldsBlock,
 } from "./components/MainComponents";
 import ApplyBlock from "./blocks/ApplyBlock";
-import { TimePickerType } from "./types";
+import { useDispatch, useSelector } from "react-redux";
+import { actions, DatePickerStateTypes } from "src/services/SessionsList";
 const DatePickerComponent = () => {
-	const [fromRange, setFromRange] = useState<TimePickerType>({
-		from: "00:00",
-		to: "23:59",
-	});
-	const [toRange, setToRange] = useState<TimePickerType>({
-		from: "00:00",
-		to: "23:59",
-	});
+	const dispatch = useDispatch();
+	const { setFromRange, setToRange } = actions;
+	const { fromRange, toRange } =
+		useSelector(
+			({ sessionListState }: { sessionListState: DatePickerStateTypes }) =>
+				sessionListState,
+		) || {};
 	const handleTimeInput = async (value: string, type: string) => {
 		if (type === "from") {
-			setFromRange((prev: TimePickerType) => ({ ...prev, [type]: value }));
+			dispatch(setFromRange(value));
 		}
 		if (type === "to") {
-			setToRange((prev: TimePickerType) => ({ ...prev, [type]: value }));
+			dispatch(setToRange(value));
 		}
 	};
+	// const ww = useSelector((s) => s) || {};
+	// console.log(ww, "ss");
 	return (
 		<PickerModalContent>
 			<RangeMenu />
@@ -35,14 +36,14 @@ const DatePickerComponent = () => {
 				<TimeFieldsBlock>
 					<TimeFieldContainer>
 						<TimeField
-							value={fromRange["from"]}
+							value={fromRange}
 							callback={(v: string) => handleTimeInput(v, "from")}
 						/>
 					</TimeFieldContainer>
 					<TimeFieldContainer>
 						<TimeField
-							value={toRange["to"]}
-							callback={(v: string) => handleTimeInput(v, "from")}
+							value={toRange}
+							callback={(v: string) => handleTimeInput(v, "to")}
 						/>
 					</TimeFieldContainer>
 				</TimeFieldsBlock>

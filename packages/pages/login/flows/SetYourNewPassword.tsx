@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { useResetPasswordMutation } from "@qusay77/auth";
+import { useResetPasswordMutation } from "src/services/auth";
 import {
 	FillButton,
 	HeaderIcon,

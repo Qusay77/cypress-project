@@ -16,7 +16,8 @@ const StyledWrapper = styled.div`
 	}
 
 	.CalendarMonth_caption {
-		padding: 0 0 46px 0 !important;
+		padding: 0 !important;
+		margin-bottom: 44px;
 		height: 24px;
 		display: flex;
 		justify-content: center;
@@ -63,4 +64,4 @@ const StyledWrapper = styled.div`
 	}
 `;
 
-export {StyledWrapper} 
+export { StyledWrapper };

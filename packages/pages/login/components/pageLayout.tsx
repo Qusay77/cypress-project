@@ -7,6 +7,7 @@ const PageContainer = styled.div`
 	> div {
 		flex: 1;
 	}
+	min-height: 740px;
 `;
 
 const PageSection = styled.div`
@@ -15,7 +16,9 @@ const PageSection = styled.div`
 
 const FormSectionContainer = styled.div`
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
+	align-items: center;
 	width: 100%;
 `;
 
@@ -27,8 +30,12 @@ const FormSectionContent = styled.div<{ maxWidth: number }>`
 `;
 
 const BottomTextContainer = styled.div`
-	position: absolute;
+	position: fixed;
 	bottom: 40px;
+	@media screen and (max-height: 780px) {
+		position: relative;
+		bottom: -20px;
+	}
 	> p {
 		display: inline;
 	}
@@ -38,6 +45,7 @@ const TextWrapperContainer = styled.div`
 	margin-top: 40px;
 	display: flex;
 	justify-content: center;
+	align-items: center;
 	> p {
 		display: inline;
 	}

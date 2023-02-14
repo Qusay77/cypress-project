@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import MainRouter from "@qusay77/router-main-router";
 import { BrowserRouter } from "react-router-dom";
-import { useRefreshTokenMutation } from "@qusay77/auth";
+import { useRefreshTokenMutation } from "src/services/auth";
 import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
+import MainRouter from "src/router";
 
 const isTokenValid = (expirationDate: string) => {
 	const currentDate = new Date();

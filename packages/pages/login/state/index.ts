@@ -13,23 +13,38 @@ const initialState: LoginStateTypes = {
 	newPasswordValidation: 0,
 	grade: 0,
 	specifics: [],
+	isEmailErrorActive: false,
+	isPasswordErrorActive: false,
 };
 const LoginSlice = createSlice({
 	name: "Login",
 	initialState,
 	reducers: {
-		
+		setIsEmailErrorActive: (state, action: PayloadAction<boolean>) => {
+			const value = action.payload;
+			state.isEmailErrorActive = value;
+		},
+		setIsPasswordErrorActive: (state, action: PayloadAction<boolean>) => {
+			const value = action.payload;
+			state.isPasswordErrorActive = value;
+		},
 		setEmail: (state, action: PayloadAction<string>) => {
 			const value = action.payload;
 			state.email = value;
 			const isValid = validateEmail(value);
-			state.emailValidation = isValid;
+			state.emailValidation = !isValid;
+			if (isValid) {
+				state.isEmailErrorActive = false;
+			}
 		},
 		setPassword: (state, action: PayloadAction<string>) => {
 			const value = action.payload;
 			state.password = value;
 			const isValid = value.length > 7;
-			state.passwordValidation = isValid;
+			state.passwordValidation = !isValid;
+			if (isValid) {
+				state.isPasswordErrorActive = false;
+			}
 		},
 		setNewPassword: (state, action: PayloadAction<string>) => {
 			const value = action.payload;

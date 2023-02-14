@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 const NavIcon = styled.div`
 	border-radius: 50%;
 	position: absolute;
-	top: 2px;
+	top: 1px;
 	width: 24px;
 	height: 24px;
 	display: flex;

@@ -1,5 +1,5 @@
-import Home from "../../Home";
-import LoginPage from "../../pages/Login";
+import Home from "../Home";
+import LoginPage from "../pages/Login";
 import { LinkedInCallback } from "react-linkedin-login-oauth2";
 import Login from "@qusay77/login-page";
 import { Routes, Route, Navigate } from "react-router-dom";
@@ -27,8 +27,7 @@ const MainRouter = ({ isAccessValid }: { isAccessValid: boolean }) => {
 					<Route path="/Alerts" element={<Alerts />} />
 					<Route path="/Implementation" element={<Implementation />} />
 					<Route path="/Updates" element={<Updates />} />
-
-					<Route path="/home" element={<Home />} />
+					<Route path="/logout" element={<Home />} />
 					<Route path="*" element={<Navigate to="/" replace />} />
 				</>
 			) : (
