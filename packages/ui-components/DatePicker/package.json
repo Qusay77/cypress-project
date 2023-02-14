@@ -1,5 +1,5 @@
 {
-	"name": "@qusay77/fluid-typography",
+	"name": "@qusay77/date-picker",
 	"main": "index.ts",
 	"version": "0.0.0",
 	"repository": {
@@ -8,5 +8,11 @@
 	},
 	"publishConfig": {
 		"registry": "https://npm.pkg.github.com/@qusay77"
+	},
+	"dependencies": {
+		"react-dates": "^21.8.0"
+	},
+	"devDependencies": {
+		"@types/react-dates": "^21.8.0"
 	}
 }

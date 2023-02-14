@@ -10,6 +10,7 @@ interface AuthStateTypes {
 		};
 	};
 	rememberMe: boolean;
+	isLoggedIn: boolean;
 	[key: string]: unknown;
 }
 

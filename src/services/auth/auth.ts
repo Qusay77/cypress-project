@@ -15,15 +15,32 @@ interface LoginResponse {
 		token: string;
 		expires: string;
 	};
+	data: {
+		message: string;
+	};
+}
+
+interface LoginResponseRefresh {
+	data: {
+		access: {
+			token: string;
+			expires: string;
+		};
+		refresh: {
+			token: string;
+			expires: string;
+		};
+	};
 }
 
 interface LoginType {
-	email: string;
-	password: string;
+	email?: string;
+	password?: string;
+	token?: string;
 }
 
 export const loginApi = createApi({
-	reducerPath: "auth",
+	reducerPath: "loginAuth",
 	baseQuery: fetchBaseQuery({
 		baseUrl: process.env.REACT_APP_API_KEY,
 		prepareHeaders: (headers, { getState }) => {
@@ -43,14 +60,14 @@ export const loginApi = createApi({
 				body: credentials,
 			}),
 		}),
-		refreshToken: builder.mutation<LoginResponse, LoginType>({
+		refreshToken: builder.mutation<LoginResponseRefresh, string>({
 			query: (refreshToken) => ({
 				url: "/v2/auth/refresh-tokens",
 				method: "POST",
 				body: { refreshToken },
 			}),
 		}),
-		forgotPassword: builder.mutation<LoginResponse, LoginType>({
+		forgotPassword: builder.mutation<{ data: LoginResponse["data"] }, string>({
 			query: (email) => ({
 				url: "/v2/auth/forgot-password",
 				method: "POST",
@@ -67,6 +84,11 @@ export const loginApi = createApi({
 	}),
 });
 
-export const { useLoginMutation } = loginApi;
+export const {
+	useLoginMutation,
+	useRefreshTokenMutation,
+	useForgotPasswordMutation,
+	useResetPasswordMutation,
+} = loginApi;
 export type { AuthStateTypes };
 export { authSlice, actions };

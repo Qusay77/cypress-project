@@ -17,7 +17,7 @@ export default function Password({
 	styles: InputProps["styles"];
 	placeholder: InputProps["placeholder"];
 }) {
-	const [showPassword, setShowPassword] = useState(false);
+	const [showPassword, setShowPassword] = useState(true);
 	return (
 		<div style={{ position: "relative", display: "flex", width: "100%" }}>
 			{/* ! */}

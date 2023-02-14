@@ -6,8 +6,6 @@ import EmailLogin from "./flows/EmailLogin";
 import ForgotYourPassword from "./flows/ForgotYourPassword";
 import SetYourNewPassword from "./flows/SetYourNewPassword";
 import SSOLogin from "./flows/SSOLogin";
-// import { useDispatch, useSelector } from "react-redux";
-// import { LoginStateTypes } from "./types";
 
 const FormSection = ({ isNewPassword }: { isNewPassword: boolean }) => {
 	const [flow, setFlow] = useState(isNewPassword ? "newPassword" : "email");
