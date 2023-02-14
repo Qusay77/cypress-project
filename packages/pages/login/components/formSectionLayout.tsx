@@ -55,7 +55,7 @@ const FillButton = styled.div<FillButtonProps>`
 	border-radius: 24px;
 	border: 1px solid
 		${({ disabled, theme }) =>
-			disabled ? theme.colors.Seperation : theme.colors.BluePrimary};
+		disabled ? theme.colors.Seperation : theme.colors.BluePrimary};
 	display: flex;
 	align-items: center;
 	justify-content: center;
