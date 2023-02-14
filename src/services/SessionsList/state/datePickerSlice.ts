@@ -8,16 +8,33 @@ const initialState: DatePickerStateTypes = {
 	endDate: moment(),
 	fromRange: "00:00",
 	toRange: "23:59",
+	range: { name: "Custom Range", value: null },
 };
 const DatePickerSlice = createSlice({
 	name: "DatePicker",
 	initialState,
 	reducers: {
-		setFromRange: (state, action: PayloadAction<DatePickerStateTypes["fromRange"]>) => {
+		setRange: (state, action: PayloadAction<DatePickerStateTypes["range"]>) => {
+			const range = action.payload;
+			if (range) {
+				state.range = range;
+				if (range.value) {
+					state.startDate = range.value.start;
+					state.endDate = range.value.end;
+				}
+			}
+		},
+		setFromRange: (
+			state,
+			action: PayloadAction<DatePickerStateTypes["fromRange"]>,
+		) => {
 			const value = action.payload;
 			state.fromRange = value;
 		},
-		setToRange: (state, action: PayloadAction<DatePickerStateTypes["toRange"]>) => {
+		setToRange: (
+			state,
+			action: PayloadAction<DatePickerStateTypes["toRange"]>,
+		) => {
 			const value = action.payload;
 			state.toRange = value;
 		},

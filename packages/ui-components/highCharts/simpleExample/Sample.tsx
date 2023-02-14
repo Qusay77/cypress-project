@@ -15,8 +15,9 @@ import UpArrow from "./Assits/Icons/arrow-circle-up.svg";
 import { Collapse } from "react-collapse";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useGetDomainMutation } from "@qusay77/orgs";
+import { actions, useGetDomainMutation } from "@qusay77/orgs";
 import ClipLoader from "react-spinners/ClipLoader";
+import { useDispatch, useSelector } from "react-redux";
 
 export interface orgsType {
 	orgId?: number;
@@ -44,10 +45,12 @@ const Sample = ({ arrayOfObects }: SampleProps) => {
 	useEffect(() => {
 		setOrgs(arrayOfObects);
 	}, [arrayOfObects]);
+	const dispatch = useDispatch();
+	const { setOrgId, setSelectedDomain } = actions;
 
 	const handleGetDomain = async (orgID: number, index: number) => {
 		console.log("index", index);
-
+		dispatch(setOrgId(orgID));
 		await getDomain({ id: orgID }).then((response: any) => {
 			setDoms(response?.data?.organizations);
 			setExpandedIndex(index);
@@ -91,6 +94,7 @@ const Sample = ({ arrayOfObects }: SampleProps) => {
 											<>
 												<DomCard
 													onClick={() => {
+														dispatch(setSelectedDomain(ele.domain));
 														navigateTo("/Sessions");
 													}}
 												>

@@ -6,7 +6,6 @@ import { fetchBaseQuery } from "@reduxjs/toolkit/query";
 import { RootState } from "store/types";
 import OrgsSlice, { actions } from "./state/orgsSlice";
 
-console.log("process.env.REACT_APP_API_KEY", process.env.REACT_APP_API_KEY);
 export const orgsApi = createApi({
 	reducerPath: "orgApi",
 	baseQuery: fetchBaseQuery({

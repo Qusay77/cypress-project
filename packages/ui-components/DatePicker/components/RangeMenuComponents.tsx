@@ -15,14 +15,15 @@ const Container = styled.div`
 	}
 `;
 
-const RangeItem = styled.div`
+const RangeItem = styled.div<{ isSelected: boolean }>`
 	cursor: pointer;
 	font-size: 14px;
 	font-weight: 400;
 	height: 17px;
 	display: flex;
 	justify-content: flex-start;
-	color: var(--Text-Body);
+	color: ${({ isSelected }) =>
+		isSelected ? "var(--Blue-Primary)" : "var(--Text-Body)"};
 `;
 
 export { Container, RangeItem };

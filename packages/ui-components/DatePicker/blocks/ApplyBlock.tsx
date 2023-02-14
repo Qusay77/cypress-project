@@ -11,8 +11,6 @@ import {
 	ControlBlock,
 	ControlButton,
 } from "../components/ApplyBlock";
-
-import { useEffect } from "react";
 import moment from "moment";
 
 const ApplyBlock = () => {
@@ -21,36 +19,34 @@ const ApplyBlock = () => {
 			({ sessionListState }: { sessionListState: DatePickerStateTypes }) =>
 				sessionListState,
 		) || {};
-
+	const { orgId, selectedDomain } =
+		useSelector(({ orgslice }: { orgslice: any }) => orgslice) || {};
 	const [getSessionList] = useGetSessionListMutation();
-	useEffect(() => {
-		console.log(
-			{
-				domain: "shop.super-pharm.co.il",
+	const onApply = () => {
+		getSessionList({
+			filterObj: {
+				domain: selectedDomain,
 				date: {
 					from:
-						startDate?.format("YYYY-MM-DD HH:mm:ss") ||
+						(startDate &&
+							`${startDate.format("YYYY-MM-DD")} ${moment(
+								fromRange,
+								"HH:mm:ss",
+							).format("HH:mm:ss")}`) ||
 						moment().format("YYYY-MM-DD HH:mm:ss"),
 					to:
-						endDate?.format("YYYY-MM-DD HH:mm:ss") ||
+						(endDate &&
+							`${endDate.format("YYYY-MM-DD")} ${moment(
+								toRange,
+								"HH:mm:ss",
+							).format("HH:mm:ss")}`) ||
 						moment().format("YYYY-MM-DD HH:mm:ss"),
 				},
 			},
-			fromRange,
-			toRange,
-		);
-		getSessionList({
-			domain: "shop.super-pharm.co.il",
-			date: {
-				from:
-					startDate?.format("YYYY-MM-DD HH:mm:ss") ||
-					moment().format("YYYY-MM-DD HH:mm:ss"),
-				to:
-					endDate?.format("YYYY-MM-DD HH:mm:ss") ||
-					moment().format("YYYY-MM-DD HH:mm:ss"),
-			},
+			orgId,
 		});
-	}, [startDate, endDate]);
+	};
+
 	return (
 		<ApplyBlockContainer>
 			<FrameContainer>
@@ -63,7 +59,9 @@ const ApplyBlock = () => {
 			</FrameContainer>
 			<ControlBlock>
 				<ControlButton>Cancel</ControlButton>
-				<ControlButton apply>Apply</ControlButton>
+				<ControlButton onClick={onApply} apply>
+					Apply
+				</ControlButton>
 			</ControlBlock>
 		</ApplyBlockContainer>
 	);

@@ -9,11 +9,14 @@ import DatePickerSlice, { actions } from "./state/datePickerSlice";
 interface SessionListResponse {}
 
 interface SessionListType {
-	domain: string;
-	date: {
-		from: string;
-		to: string;
+	filterObj: {
+		domain: string;
+		date: {
+			from: string;
+			to: string;
+		};
 	};
+	orgId: number;
 }
 
 export const sessionListApi = createApi({
@@ -34,8 +37,8 @@ export const sessionListApi = createApi({
 	}),
 	endpoints: (builder) => ({
 		getSessionList: builder.mutation<SessionListResponse, SessionListType>({
-			query: (filterObj) => ({
-				url: "/v2/sessions/645?kip=0&take=25",
+			query: ({ filterObj, orgId }) => ({
+				url: `/v2/sessions/${orgId}?kip=0&take=25`,
 				method: "POST",
 				body: {
 					filter: filterObj,

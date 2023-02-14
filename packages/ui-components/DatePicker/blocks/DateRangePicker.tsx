@@ -2,7 +2,7 @@
 import { DayPickerRangeController } from "react-dates";
 import "react-dates/lib/css/_datepicker.css";
 import "react-dates/initialize";
-import moment, { Moment } from "moment";
+import moment from "moment";
 import { useState } from "react";
 import { StyledWrapper } from "../components/PickerWrapper";
 import { PickerIcon, RenderMonth } from "./RenderMonth";
@@ -20,7 +20,7 @@ const DateRangePicker = () => {
 	});
 
 	const dispatch = useDispatch();
-	const { setStartDate, setEndDate } = actions;
+	const { setStartDate, setEndDate, setRange } = actions;
 	const { startDate, endDate } =
 		useSelector(
 			({ sessionListState }: { sessionListState: DatePickerStateTypes }) =>
@@ -43,6 +43,7 @@ const DateRangePicker = () => {
 				onDatesChange={({ startDate, endDate }) => {
 					dispatch(setStartDate(startDate));
 					dispatch(setEndDate(endDate));
+					dispatch(setRange({ name: "Custom Range", value: null }));
 				}}
 				navPrev={<PickerIcon left action={() => console.log("prev")} />}
 				navNext={<PickerIcon action={() => console.log("next")} />}

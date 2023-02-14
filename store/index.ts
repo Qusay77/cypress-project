@@ -19,7 +19,7 @@ const orgsMiddleware = [orgsApi.middleware];
 const persistConfig = {
 	key: "root",
 	storage,
-	whitelist: ["auth"],
+	whitelist: ["auth", "orgslice"],
 };
 
 const reducer = combineReducers({
@@ -38,7 +38,7 @@ const persistedReducer = persistReducer(persistConfig, reducer);
 export const store = configureStore({
 	reducer: persistedReducer,
 	middleware: (getDefaultMiddleware) =>
-		getDefaultMiddleware()
+		getDefaultMiddleware({ serializableCheck: false })
 			.concat(middleware)
 			.concat(middleware2)
 			.concat(middleware3)
