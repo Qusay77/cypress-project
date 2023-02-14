@@ -18,17 +18,7 @@
 		"jsxImportSource": "@emotion/react",
 		"types": ["node", "vite/client"]
 	},
-	"include": [
-		"src/**/*",
-		"storybook/stories/*",
-		"store",
-		"storybook/stories/Table/Table.stories.tsx",
-		"storybook/stories/Table/mock.js",
-		"packages",
-		"custom.d.ts",
-		"emotion.d.ts",
-		"storybook/.storybook/preview.tsx"
-	],
+	"include": ["src/**/*", "store", "packages", "custom.d.ts", "emotion.d.ts"],
 	"paths": {
 		"src/*": ["src/*"]
 	}

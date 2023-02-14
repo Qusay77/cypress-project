@@ -10,3 +10,5 @@ build-storybook.log
 lerna-debug.log
 storybook-static
 yarn.lock
+.gitmodules
+storybook/
