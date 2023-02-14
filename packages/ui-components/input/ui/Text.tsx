@@ -10,15 +10,19 @@ export default function Text({
 	placeholder,
 	styles,
 }: {
-	value: InputProps["value"];
-	setValue: InputProps["setValue"];
-	error?: boolean | null;
-	placeholder: InputProps["placeholder"];
-	styles: InputProps["styles"];
+  value: InputProps["value"];
+  setValue: InputProps["setValue"];
+  error?: boolean | null;
+  placeholder: InputProps["placeholder"];
+  styles: InputProps["styles"];
 }) {
 	return (
 		<Input
-			style={{ ...styles?.input, width: "-webkit-fill-available" }}
+			style={{
+				...styles?.input,
+				width: "-webkit-fill-available",
+				minWidth: "null",
+			}}
 			placeholder={placeholder}
 			error={error || false}
 			errorColor={styles?.error?.color as string}

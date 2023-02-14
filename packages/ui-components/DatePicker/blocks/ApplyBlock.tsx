@@ -1,3 +1,8 @@
+import { useSelector } from "react-redux";
+import {
+	DatePickerStateTypes,
+	useGetSessionListMutation,
+} from "src/services/SessionsList";
 import {
 	ApplyBlockContainer,
 	FrameContainer,
@@ -7,12 +12,54 @@ import {
 	ControlButton,
 } from "../components/ApplyBlock";
 
+import { useEffect } from "react";
+import moment from "moment";
+
 const ApplyBlock = () => {
+	const { startDate, endDate, fromRange, toRange } =
+		useSelector(
+			({ sessionListState }: { sessionListState: DatePickerStateTypes }) =>
+				sessionListState,
+		) || {};
+
+	const [getSessionList] = useGetSessionListMutation();
+	useEffect(() => {
+		console.log(
+			{
+				domain: "shop.super-pharm.co.il",
+				date: {
+					from:
+						startDate?.format("YYYY-MM-DD HH:mm:ss") ||
+						moment().format("YYYY-MM-DD HH:mm:ss"),
+					to:
+						endDate?.format("YYYY-MM-DD HH:mm:ss") ||
+						moment().format("YYYY-MM-DD HH:mm:ss"),
+				},
+			},
+			fromRange,
+			toRange,
+		);
+		getSessionList({
+			domain: "shop.super-pharm.co.il",
+			date: {
+				from:
+					startDate?.format("YYYY-MM-DD HH:mm:ss") ||
+					moment().format("YYYY-MM-DD HH:mm:ss"),
+				to:
+					endDate?.format("YYYY-MM-DD HH:mm:ss") ||
+					moment().format("YYYY-MM-DD HH:mm:ss"),
+			},
+		});
+	}, [startDate, endDate]);
 	return (
 		<ApplyBlockContainer>
 			<FrameContainer>
 				<FrameText>Selected Time Frame</FrameText>
-				<FrameRangeText>11.08.2022 - 04.09.2022</FrameRangeText>
+				<FrameRangeText>
+					<>
+						{startDate?.format("YYYY-MM-DD")} - {endDate?.format("YYYY-MM-DD")}
+					</>
+				</FrameRangeText>
 			</FrameContainer>
 			<ControlBlock>
 				<ControlButton>Cancel</ControlButton>

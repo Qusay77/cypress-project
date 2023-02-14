@@ -1,0 +1,11 @@
+{
+	"name": "@packages/table",
+	"main": "index.ts",
+	"version": "0.1.0",
+	"dependencies": {
+		"array-move": "^4.0.0",
+		"react-dnd": "^16.0.1",
+		"react-dnd-html5-backend": "^16.0.1",
+		"rsuite": "^5.23.2"
+	}
+}

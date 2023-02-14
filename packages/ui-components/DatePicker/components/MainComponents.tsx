@@ -8,6 +8,7 @@ const PickerModalContent = styled.div`
 	border: 1px solid black;
 	border-radius: 5px;
 	position: relative;
+	background-color: white;
 `;
 
 const PickerContainer = styled.div`

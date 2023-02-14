@@ -1,5 +1,5 @@
-import { useSelector } from "react-redux";
-import { useForgotPasswordMutation } from "@qusay77/auth";
+import { useDispatch, useSelector } from "react-redux";
+import { useForgotPasswordMutation } from "src/services/auth";
 import {
 	FillButton,
 	HeaderIcon,
@@ -8,6 +8,7 @@ import {
 } from "../components/formSectionLayout";
 import InputController from "../components/InputController";
 import { FormSectionContent } from "../components/pageLayout";
+import { actions } from "../state";
 import { LoginStateTypes } from "../types";
 import TextWrapper from "./blocks/TextWrapper";
 
@@ -16,13 +17,19 @@ const ForgotYourPassword = ({
 }: {
 	handleFlow: (flow: string) => void;
 }) => {
-	const { email } = useSelector(
+	const { email, emailValidation } = useSelector(
 		({ login }: { login: LoginStateTypes }) => login,
 	);
+	const { setIsEmailErrorActive } = actions;
 	const [forgotPassword, { isLoading }] = useForgotPasswordMutation();
+	const dispatch = useDispatch();
 	const handleForgotPassword = async () => {
-		await forgotPassword(email);
-		handleFlow("checkYourEmail");
+		if (!emailValidation && email.length) {
+			await forgotPassword(email);
+			handleFlow("checkYourEmail");
+		} else {
+			dispatch(setIsEmailErrorActive(true));
+		}
 	};
 	return (
 		<FormSectionContent maxWidth={460}>

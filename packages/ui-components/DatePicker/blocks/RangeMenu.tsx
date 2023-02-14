@@ -12,7 +12,9 @@ const RangeMenu = () => {
 	return (
 		<Container>
 			{ranges.map((range) => (
-				<RangeItem key={`${range}-picker`}>{range}</RangeItem>
+				<RangeItem key={`${range}-picker`}>
+					<p>{range}</p>
+				</RangeItem>
 			))}
 		</Container>
 	);

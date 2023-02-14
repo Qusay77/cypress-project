@@ -10,15 +10,17 @@ import InputController from "../components/InputController";
 import { FormSectionContent } from "../components/pageLayout";
 import ForgotPassword from "./blocks/ForgotPassword";
 import { useLinkedIn } from "react-linkedin-login-oauth2";
-import { useLoginMutation } from "@qusay77/auth";
-import { useSelector } from "react-redux";
+import { useLoginMutation } from "src/services/auth";
+import { useDispatch, useSelector } from "react-redux";
 import { LoginStateTypes } from "../types";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { actions } from "../state";
 const EmailLogin = ({ handleFlow }: { handleFlow: (flow: string) => void }) => {
-	const { email, password } = useSelector(
+	const { email, password, emailValidation, passwordValidation } = useSelector(
 		({ login }: { login: LoginStateTypes }) => login,
 	);
+	const { setIsPasswordErrorActive, setIsEmailErrorActive } = actions;
 	const navigate = useNavigate();
 	const { linkedInLogin } = useLinkedIn({
 		clientId: "787nmmwpr0rfku",
@@ -46,16 +48,27 @@ const EmailLogin = ({ handleFlow }: { handleFlow: (flow: string) => void }) => {
 		},
 	});
 	const [login, { isLoading }] = useLoginMutation();
+	const dispatch = useDispatch();
 	const handleEmailLogin = async () => {
-		const auth = await login({
-			email,
-			password,
-		}).unwrap();
-		console.log(auth);
-		localStorage.setItem("accessToken", JSON.stringify(auth.access));
-		localStorage.setItem("refreshToken", JSON.stringify(auth.refresh));
-		window.dispatchEvent(new Event("storage"));
-		navigate("/");
+		if (
+			email.length &&
+			password.length &&
+			!emailValidation &&
+			!passwordValidation
+		) {
+			const auth = await login({
+				email,
+				password,
+			}).unwrap();
+			console.log(auth);
+			localStorage.setItem("accessToken", JSON.stringify(auth.access));
+			localStorage.setItem("refreshToken", JSON.stringify(auth.refresh));
+			window.dispatchEvent(new Event("storage"));
+			navigate("/");
+		} else {
+			dispatch(setIsPasswordErrorActive(true));
+			dispatch(setIsEmailErrorActive(true));
+		}
 	};
 
 	return (
@@ -81,7 +94,13 @@ const EmailLogin = ({ handleFlow }: { handleFlow: (flow: string) => void }) => {
 				<FillButton onClick={linkedInLogin} invert={true} width={"45%"}>
 					Linkedin
 				</FillButton>
-				<FillButton invert={true} width={"45%"}>
+				<FillButton
+					onClick={() => {
+						navigate("/sso");
+					}}
+					invert={true}
+					width={"45%"}
+				>
 					SSO
 				</FillButton>
 			</ForgotPasswordBetweenContainer>

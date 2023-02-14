@@ -36,6 +36,7 @@ const ForgotPasswordBetweenContainer = styled.div`
 const VarietyText = styled.p<VarietyTextProps>`
 	font-weight: ${({ weight }) => weight};
 	line-height: 17px;
+	margin: 0;
 	color: ${({ fontColor }) => fontColor};
 	${({ theme, fontSize }) => theme.helpers.fontClamp(fontSize / 2, fontSize)}
 	user-select: none;
@@ -65,7 +66,7 @@ const FillButton = styled.div<FillButtonProps>`
 `;
 
 const RememberMeBlock = styled.div`
-	display: flex;
+	display: none;
 	justify-content: space-between;
 	align-items: center;
 	gap: 12px;

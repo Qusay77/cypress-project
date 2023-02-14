@@ -1,6 +1,6 @@
 {
-	"name": "@qusay77/router-page-route",
-	"main": "index.tsx",
+	"name": "@qusay77/sso-page",
+	"main": "index.ts",
 	"version": "0.0.0",
 	"repository": {
 		"url": "git+https://github.com/Qusay77/cypress-project.git",

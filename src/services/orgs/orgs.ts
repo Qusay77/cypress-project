@@ -8,35 +8,35 @@ import OrgsSlice, { actions } from "./state/orgsSlice";
 
 console.log("process.env.REACT_APP_API_KEY", process.env.REACT_APP_API_KEY);
 export const orgsApi = createApi({
-  reducerPath: "orgApi",
-  baseQuery: fetchBaseQuery({
-    baseUrl: process.env.REACT_APP_API_KEY,
-    prepareHeaders: (headers, { getState }) => {
-      // By default, if we have a token in the store, let's use that for authenticated requests
-      //   const token = (getState() as RootState).auth.token;
+	reducerPath: "orgApi",
+	baseQuery: fetchBaseQuery({
+		baseUrl: process.env.REACT_APP_API_KEY,
+		prepareHeaders: (headers, { getState }) => {
+			// By default, if we have a token in the store, let's use that for authenticated requests
+			//   const token = (getState() as RootState).auth.token;
 
-      let token: any = localStorage.getItem("accessToken");
-      if (token) {
-        headers.set("Authorization", `Bearer ${JSON.parse(token)?.token}`);
-      }
-      return headers;
-    },
-  }),
-  endpoints: (builder) => ({
-    getOrgs: builder.mutation<Array<OrgsStateTypes>, {}>({
-      query: (credentials) => ({
-        url: "/v2/organizations/",
-        method: "POST",
-        body: credentials,
-      }),
-    }),
-    getDomain: builder.mutation<Array<DomainStateTypes>, DomainPayloadTypes>({
-      query: ({ id }) => ({
-        url: `v2/organizations/${id}/domains`,
-        method: "GET",
-      }),
-    }),
-  }),
+			const token: any = localStorage.getItem("accessToken");
+			if (token) {
+				headers.set("Authorization", `Bearer ${JSON.parse(token)?.token}`);
+			}
+			return headers;
+		},
+	}),
+	endpoints: (builder) => ({
+		getOrgs: builder.mutation<Array<OrgsStateTypes>, {}>({
+			query: (credentials) => ({
+				url: "/v2/organizations/",
+				method: "POST",
+				body: credentials,
+			}),
+		}),
+		getDomain: builder.mutation<Array<DomainStateTypes>, DomainPayloadTypes>({
+			query: ({ id }) => ({
+				url: `v2/organizations/${id}/domains`,
+				method: "GET",
+			}),
+		}),
+	}),
 });
 
 export const { useGetOrgsMutation, useGetDomainMutation } = orgsApi;

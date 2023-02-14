@@ -23,7 +23,10 @@ export const ErrorLabel = styled(Label)`
 
 export const Input = styled.input`
 	${InputLayout}
-	width: calc(100% - 32px);
+	::placeholder {
+		color: #b3b3b3;
+	}
+	width: 100%;
 	border: ${(props: InputStyleProps) =>
 		props.error ? `1px solid ${props.errorColor}` || "1px solid #D83928;" : ""};
 `;

@@ -8,6 +8,8 @@ import { StyledWrapper } from "../components/PickerWrapper";
 import { PickerIcon, RenderMonth } from "./RenderMonth";
 import { RenderCalendarDay } from "./PickerComponent";
 import { WeekHeaderText } from "../components/PickerComponents";
+import { actions, DatePickerStateTypes } from "src/services/SessionsList";
+import { useSelector, useDispatch } from "react-redux";
 
 const DateRangePicker = () => {
 	moment.updateLocale("en", {
@@ -17,8 +19,13 @@ const DateRangePicker = () => {
 		weekdaysMin: "Sun_Mon_Tue_Wed_Thu_Fri_Sat".split("_"),
 	});
 
-	const [startDate, setStartDate] = useState<null | Moment>(null);
-	const [endDate, setEndDate] = useState<null | Moment>(null);
+	const dispatch = useDispatch();
+	const { setStartDate, setEndDate } = actions;
+	const { startDate, endDate } =
+		useSelector(
+			({ sessionListState }: { sessionListState: DatePickerStateTypes }) =>
+				sessionListState,
+		) || {};
 	const [focusedInput, setFocusedInput] = useState<
 		"startDate" | "endDate" | null
 	>("startDate");
@@ -34,8 +41,8 @@ const DateRangePicker = () => {
 					setFocusedInput(focusedInput);
 				}}
 				onDatesChange={({ startDate, endDate }) => {
-					setStartDate(startDate);
-					setEndDate(endDate);
+					dispatch(setStartDate(startDate));
+					dispatch(setEndDate(endDate));
 				}}
 				navPrev={<PickerIcon left action={() => console.log("prev")} />}
 				navNext={<PickerIcon action={() => console.log("next")} />}

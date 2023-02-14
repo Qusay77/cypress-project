@@ -51,9 +51,9 @@ export const RowUpperContent = styled.div`
 export const Light = styled.div<any>`
   background: ${(props) => (props.trailExpired ? "#ca0314" : "#03ca62")};
   box-shadow: ${(props) =>
-    props.trailExpired
-      ? "0 0 4px 1px  #ec4856"
-      : "0 0 4px 1px rgb(3 202 98 / 60%)"};
+		props.trailExpired
+			? "0 0 4px 1px  #ec4856"
+			: "0 0 4px 1px rgb(3 202 98 / 60%)"};
   margin-left: 15px;
   display: inline-block;
   width: 15px;
